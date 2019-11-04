@@ -23,7 +23,8 @@
     <!-- Call to Action Well -->
     <div class="card text-white bg-secondary my-5 py-4 text-center">
       <div class="card-body">
-        <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+        <p class="text-white m-0">Everyone can share dry goods documents for a fee, and users can pay to view the documents they need. 
+            <a href="{{ route('document.index') }}" style="font-size:17px;color:cyan;text-decoration:none;font-weight:600">Check it Now</a></p>
       </div>
     </div>
 
@@ -44,18 +45,6 @@
       <div class="col-md-4 mb-5">
         <div class="card h-100">
           <div class="card-body">
-            <h2 class="card-title">Knowledge Mine</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-          </div>
-          <div class="card-footer">
-            <a href="{{ route('document.index') }}" class="btn btn-primary btn-sm">More Info</a>
-          </div>
-        </div>
-      </div>
-      <!-- /.col-md-4 -->
-      <div class="col-md-4 mb-5">
-        <div class="card h-100">
-          <div class="card-body">
             <h2 class="card-title">Sharing Blog</h2>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
           </div>
@@ -65,8 +54,8 @@
         </div>
       </div>
       <!-- /.col-md-4 -->
-      <!-- /.col-md-4 -->
-      <div class="col-md-4 mb-5" style="margin: 0 auto;">
+       <!-- /.col-md-4 -->
+       <div class="col-md-4 mb-5" style="margin: 0 auto;">
         <div class="card h-100">
           <div class="card-body">
             <h2 class="card-title">Bounty Q & A</h2>
@@ -77,7 +66,8 @@
           </div>
         </div>
       </div>
-      <!-- /.col-md-4 -->
+      
+     
 
     </div>
     <!-- /.row -->

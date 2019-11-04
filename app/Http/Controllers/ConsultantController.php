@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use App\Course_Category;
-use App\Course;
+use App\Profile;
 use App\User;
 use App\OrganizerApply;
 use App\CourseInvoice;
@@ -34,14 +34,14 @@ class ConsultantController  extends Controller
     {
         $OrgForm = OrganizerApply::all();
         $courseCategory = Course_Category::all();
-        $courses = Course::get();
-        return view('consultant/index', compact('courses', 'courseCategory','OrgForm'));
+        $profiles = Profile::get();
+        return view('consultant/index', compact('profiles', 'courseCategory','OrgForm'));
     }
 
     public function show(User $user)
     {
         $consultant = User::where('id', $user->id)->first();
-        $courses = Course::get();
-        return view('consultant/show', compact('consultant','courses'));
+        $profiles = Profile::get();
+        return view('consultant/show', compact('consultant','profiles'));
     }
 }
