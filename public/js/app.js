@@ -47162,7 +47162,7 @@ var render = function() {
             _c("strong", { staticClass: "primary-font" }, [
               _vm._v(
                 "\n                    " +
-                  _vm._s(message.user.name) +
+                  _vm._s(message.user.username) +
                   "\n                "
               )
             ])
