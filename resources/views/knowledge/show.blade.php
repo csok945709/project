@@ -14,51 +14,13 @@
                         @endcan
                         <div class="d-flex ">   
                             <div class="pr-4"><strong >{{ $document->created_at }}</strong> </div>
-                            <div class="pr-4"><strong >989</strong> Like</div>
-                            <div class="pr-4"><strong >20</strong> Purchased</div>          
+                            <div class="pr-4"><strong >0</strong> Reviews</div>
+                            <div class="pr-4"><strong >1</strong> Purchased</div>          
                         </div> 
                         <hr>
                         {!! $document->description !!}
 
-                    </div>
-                        <div class="col-3">
-                            <?php $path_parts = pathinfo($document->document );
-                            if ($path_parts['extension'] == "doc") {
-                                echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;float: right;margin-top:5px;" />';
-                                
-                            } elseif ($path_parts['extension'] == "pdf") {
-                                echo '<img src="/storage/document/pdf.png" style="width:100px;height:auto;" />';
-                            } elseif ($path_parts['extension'] == "docx") {
-                                echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;margin-top: 20px;" />';
-                            }
-                            ?> 
-                        
-                       
-                        
-                            @if ($document->price !== 0)
-                                @if ($docCount == 1)
-                                        @if ($document->id === $docIdCheck->document_id && Auth::user()->id === $payerId->buyer_id)
-                                                {{-- Payed Can download --}}
-                                                <a href="{{ route('document.download', [Auth::user()->id,$document->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
-                                            @else
-                                                {{-- Need Pay --}}
-                                                <h5 style="font-size:16px;font-weight:700;padding-top:15px;">Price: Rm {{$document->price }}</h5>
-                                                <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" border="0" alt="PayPal Logo"></a>
-                                                <a href="{{ route('payment',[$document->id]) }}" class="btn btn-success">Pay Paypal</a>
-                                            @endif
-                                @else
-                                    {{-- Need Pay --}}
-                                    <h5 style="font-size:16px;font-weight:700;padding-top:15px;">Price: Rm {{$document->price }}</h5>
-                                    <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" border="0" alt="PayPal Logo"></a>
-                                    <a href="{{ route('payment',[$document->id]) }}" class="btn btn-success">Pay Paypal</a>
-                                @endif
-                            @else
-                                {{-- No price --}}
-                                <a href="{{ route('document.download', [Auth::user()->id,$document->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
-                            @endif
-                    </div>
-                        
-                   
+                    </div>   
                 </div>
             </div>         
                 <div class="card mt-4">
@@ -153,18 +115,58 @@
                 </div> 
         </div> 
     </div>
-        <div class="col-4 card h-100">
-            <div class="card-body">
-                <follow-button user-id="{{ $document->user->id }}" follows="{{ $follows }}"></follow-button>
-                <img src="{{ $document->user->profile->profileImage() }}" class="rounded-circle" style="max-width:50px;">
-                <a href="{{ route('profile.indexDocument', [$document->user->id]) }}" style="text-decoration:none"> <strong style="font-size:18px;"> {{ $document->user->username }} </strong></a>
-                        <div class="d-flex">   
-                        {{-- <div class="pr-4"><strong >{{ $user->document->count() }}</strong> Posts</div> --}}
-                        <div class="pr-4"><strong >23K</strong> Followers</div>
-                        <div class="pr-4"><strong >212</strong> Following</div>
-                    </div>    
+        <div class="col-4">
+            <div class="card mb-3">
+                    <div class="card-body">
+                            <follow-button user-id="{{ $document->user->id }}" follows="{{ $follows }}"></follow-button>
+                            <img src="{{ $document->user->profile->profileImage() }}" class="rounded-circle" style="max-width:50px;">
+                            <a href="{{ route('profile.indexDocument', [$document->user->id]) }}" style="text-decoration:none"> <strong style="font-size:18px;"> {{ $document->user->username }} </strong></a>
+                                    <div class="d-flex">   
+                                    {{-- <div class="pr-4"><strong >{{ $user->document->count() }}</strong> Posts</div> --}}
+                                    <div class="pr-4"><strong >23K</strong> Followers</div>
+                                    <div class="pr-4"><strong >212</strong> Following</div>
+                                </div>    
+                        </div>
             </div>
-        </div>
+            
+   
+        <div class="card">
+            <div class="card-body">
+                <?php $path_parts = pathinfo($document->document );
+                if ($path_parts['extension'] == "doc") {
+                    echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;float: right;margin-top:5px;" />';
+                    
+                } elseif ($path_parts['extension'] == "pdf") {
+                    echo '<img src="/storage/document/pdf.png" style="width:100px;height:auto;" />';
+                } elseif ($path_parts['extension'] == "docx") {
+                    echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;margin-top: 20px;" />';
+                }
+                ?> 
+                @if ($document->price !== 0)
+                    @if ($docCount == 1)
+                            @if ($document->id === $docIdCheck->document_id && Auth::user()->id === $payerId->buyer_id)
+                                    {{-- Payed Can download --}}
+                                    <a href="{{ route('document.download', [Auth::user()->id,$document->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
+                                @else
+                                    {{-- Need Pay --}}
+                                    <h5 style="font-size:16px;font-weight:700;padding-top:15px;">Price: Rm {{$document->price }}</h5>
+                                    <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" border="0" alt="PayPal Logo"></a>
+                                    <a href="{{ route('payment',[$document->id]) }}" class="btn btn-success">Pay Paypal</a>
+                                @endif
+                    @else
+                        {{-- Need Pay --}}
+                        <h5 style="font-size:16px;font-weight:700;padding-top:15px;">Price: Rm {{$document->price }}</h5>
+                        <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png" border="0" alt="PayPal Logo"></a>
+                        <a href="{{ route('payment',[$document->id]) }}" class="btn btn-success">Pay Paypal</a>
+                    @endif
+                @else
+                    {{-- No price --}}
+                    <a href="{{ route('document.download', [Auth::user()->id,$document->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
+                @endif
+            </div>
+  
+    </div>
+
     </div>
 </div>
 

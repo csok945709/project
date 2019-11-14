@@ -48,7 +48,7 @@ class KnowledgesController extends Controller
         $data = request()->validate([
             'caption' => 'required',
             'description' => 'required',
-            'document' => ['required', 'mimes:doc,pdf,docx,zip'],
+            'document' => ['required', 'mimes:doc,pdf,docx,zip,ppt,pptx'],
         ]);
         
         $documentPath = request('document')->store('document','public');
@@ -69,7 +69,7 @@ class KnowledgesController extends Controller
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $comments =  KnowledgeComment::latest('created_at')->get();
-        $replies =  KnowledgeReply::where('knowledgecomment_id', $document->id)->get();
+        $replies =  KnowledgeReply::get();
         $docCount = KnowledgeInvoice::where('document_id', $document->id)->where('buyer_id', $user->id)->count();
         $payerId = KnowledgeInvoice::where('document_id', $document->id)->first('buyer_id');
         $docIdCheck =  KnowledgeInvoice::where('document_id', $document->id)->first('document_id',);
@@ -84,10 +84,6 @@ class KnowledgesController extends Controller
     }
 
     
-
-
-   
-    
     public function edit(User $user, Document $document)
     {
         return view('knowledge.edit',compact('user','document'));
@@ -100,28 +96,26 @@ class KnowledgesController extends Controller
         return redirect()->route('profile.indexDocument', compact('user'));
     }
 
-    public function update(User $user, Document $document)
+    public function update(User $user, Document $documentID)
     {
     
         $data = request()->validate([
             'caption' => 'required',
             'description' => 'required',
-            'image' => '',
+            'document' => '',
         ]);
 
-        if (request('image')) {
-            $imagePath = request('image')->store('uploads', 'public');
-            $image = Image::make(public_path("/storage/{$imagePath}"))->fit(1000,1000);
-            $image->save();
+        if (request('document')) {
+            $documentPath = request('document')->store('document','public');
 
-            $imageArray = ['image' => $imagePath];
-            
+            $documentArray = ['document' => $documentPath];
         }
-        Auth::user()->documents->find($document)->update(array_merge(
+        auth()->user()->documents()->update(array_merge(
             $data,
-            $imageArray ?? []
+            $documentArray ?? []
         ));
+
         // return view('profiles.profile',compact('user'));
-        return redirect()->route('document.show', [$user,$document]);
+        return redirect()->route('document.show', [$user,$documentID]);
     }
 }

@@ -20,7 +20,7 @@
                         </div>
                         
                         <div style="margin-left:10%">
-                            <img src="{{ $consultant->profile->profileImage() }}" class="rounded-circle" style="width:35%">  
+                            <img src="{{ $consultant->profile->profileImage() }}" class="rounded-circle" style="width:30%">  
                         </div>
                         <div>
                                 

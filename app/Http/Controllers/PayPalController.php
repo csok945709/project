@@ -36,7 +36,7 @@ class PayPalController extends Controller
         $data['invoice_id'] = uniqid();
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('payment.success');
-        $data['cancel_url'] = route('payment.cancel');
+        $data['cancel_url'] = route('payment.getRequest');
         $data['total'] = $price;
   
         $provider = new ExpressCheckout;

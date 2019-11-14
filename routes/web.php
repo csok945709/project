@@ -52,7 +52,7 @@ Route::get('/d/create', 'KnowledgesController@create')->name('document.create');
 Route::post('/d', 'KnowledgesController@store')->name('document.store');
 Route::get('/d/{user}/{document}/delete', 'KnowledgesController@delete')->name('document.delete');
 Route::get('/d/{user}/{document}/edit', 'KnowledgesController@edit')->name('document.edit');
-Route::patch('/d/{user}/{document}', 'KnowledgesController@update')->name('document.update');
+Route::patch('/d/{user}/{documentID}', 'KnowledgesController@update')->name('document.update');
 Route::get('/d/{user}/{document}/show', 'KnowledgesController@show')->name('document.show');
 Route::get('/d/{user}/{document}/show/download', 'KnowledgesController@download')->name('document.download');
 //Knowledge Comment 

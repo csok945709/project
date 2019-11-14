@@ -17,7 +17,6 @@
                                         <?php $path_parts = pathinfo($document->document );
                                         if ($path_parts['extension'] == "doc") {
                                             echo '<img src="/storage/document/docx.png" style="width:80px;height:auto;float: right;margin-top:5px;" />';
-                                            
                                         } elseif ($path_parts['extension'] == "pdf") {
                                             echo '<img src="/storage/document/pdf.png" style="width:80px;height:auto;" />';
                                         } elseif ($path_parts['extension'] == "docx") {

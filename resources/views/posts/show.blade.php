@@ -29,7 +29,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            <h3 style="text-align:center">Comment</h3>
+                            <h3 style="text-align:center">Reviews</h3>
                             <hr>                  
                     <div class="comment-container">   
                         @foreach($comments as $comment)
