@@ -55,6 +55,8 @@ Route::get('/d/{user}/{document}/edit', 'KnowledgesController@edit')->name('docu
 Route::patch('/d/{user}/{documentID}', 'KnowledgesController@update')->name('document.update');
 Route::get('/d/{user}/{document}/show', 'KnowledgesController@show')->name('document.show');
 Route::get('/d/{user}/{document}/show/download', 'KnowledgesController@download')->name('document.download');
+Route::post('/ratingDocument/{document}', 'KnowledgesController@documentStar')->name('documentStar');
+
 //Knowledge Comment 
 Route::resource('/Knowledegecomments','KnowledgeCommentsController');
 Route::resource('/d/{document}/Knowledegecomments','KnowledgeCommentsController');
@@ -105,12 +107,15 @@ Route::get('/onlinecourses', 'OnlineCourseController@index')->name('course.index
 Route::get('/onlinecourses/shop', 'OnlineCourseController@shop')->name('course.shop');
 Route::get('/courseCat', 'OnlineCourseController@courseCat')->name('course.courseCat');
 Route::get('/c/create', 'OnlineCourseController@create')->name('course.create');
+Route::get('/c/{user}/{course}/register', 'OnlineCourseController@courseRegister')->name('course.register');
 Route::get('/c/{user}/{course}/detail', 'OnlineCourseController@detail')->name('course.detail');
 Route::get('/c/{user}/{course}', 'OnlineCourseController@show')->name('course.show');
 Route::post('/c', 'OnlineCourseController@store')->name('course.store');
 Route::get('/c/{user}/{course}/edit', 'OnlineCourseController@edit')->name('course.edit');
 Route::patch('/c/{user}/{course}', 'OnlineCourseController@update')->name('course.update');
 Route::get('/c/{user}/{course}/delete', 'OnlineCourseController@delete')->name('course.delete');
+Route::post('/ratingCourse/{course}', 'OnlineCourseController@courseStar')->name('courseStar');
+
 //Online Course Comment 
 Route::resource('/coursecomments','CourseCommentsController');
 Route::resource('/coursecomments/replies','CourseRepliesController');

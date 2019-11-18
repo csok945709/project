@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use willvincent\Rateable\Rateable;
+use Illuminate\Database\Eloquent\Model;
+
 
 use App\User;
 use App\Document;
 use App\KnowledgeInvoice;
 use App\KnowledgeComment;
 use App\KnowledgeReply;
-
+use App\Rating;
 class KnowledgesController extends Controller
 {
     /**
@@ -73,7 +76,10 @@ class KnowledgesController extends Controller
         $docCount = KnowledgeInvoice::where('document_id', $document->id)->where('buyer_id', $user->id)->count();
         $payerId = KnowledgeInvoice::where('document_id', $document->id)->first('buyer_id');
         $docIdCheck =  KnowledgeInvoice::where('document_id', $document->id)->first('document_id',);
-        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount'));
+        $documentRating = Document::where('id', $document->id)->first();
+        $ratingCount = Rating::where('rateable_type', 'App\Document')->count();
+        $ratingAve = number_format($documentRating->userAverageRating, 2);
+        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount'));
     }
 
     public function download(User $user, Document $document)
@@ -118,4 +124,14 @@ class KnowledgesController extends Controller
         // return view('profiles.profile',compact('user'));
         return redirect()->route('document.show', [$user,$documentID]);
     }
+
+    public function documentStar (Request $request, Document $document) {
+        $document = Document::where('id', $document->id)->first();
+        dd('i document');
+        $rating = new Rating;
+        $rating->user_id = Auth::id();
+        $rating->rating = $request->input('star');
+        $document->ratings()->save($rating);
+        return redirect()->back();
+  }
 }

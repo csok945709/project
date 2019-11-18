@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use willvincent\Rateable\Rateable;
+use Illuminate\Database\Eloquent\Model;
+
 use App\Course_Category;
 use App\Course;
 use App\User;
@@ -12,7 +16,8 @@ use App\OrganizerApply;
 use App\CourseInvoice;
 use App\CourseReply;
 use App\CourseComment;
-
+use App\Rating;
+use DB;
 class OnlineCourseController extends Controller
 {
     /**
@@ -90,24 +95,6 @@ class OnlineCourseController extends Controller
         // return view('onlineCourses/index', compact('coursesData'));
     }
 
-    public function show(User $user, Course $course)
-    {
-        $user = $user->id;
-        $comments =  CourseComment::latest('created_at')->get();
-        $replies =  CourseReply::get();
-        $courseCount = CourseInvoice::where('course_id', $course->id)->where('buyer_id', $user)->count();
-        $payerId = CourseInvoice::where('course_id', $course->id)->first('buyer_id');
-        $courseIdCheck =  CourseInvoice::where('course_id', $course->id)->first('course_id',);
-        // $comments = Comment::latest('created_at')->get();
-        $follows = (auth()->user()) ? auth()->user()->following->contains($user) : false;
-        $course = Course::where('id', $course->id)->first();
-        
-       
-        
-        
-        return view('onlineCourses/show',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies'));
-    }
-
     public function detail(User $user, Course $course)
     {
         $user = $user->id;
@@ -118,8 +105,10 @@ class OnlineCourseController extends Controller
         $course = Course::where('id', $course->id)->first();
         $comments =  CourseComment::latest('created_at')->get();
         $replies =  CourseReply::get();
-        
-        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies'));
+        $courseRating = Course::where('id', $course->id)->first();
+        $ratingCount = Rating::where('rateable_type', 'App\Course')->count();
+        $ratingAve = number_format($courseRating->userAverageRating, 2);
+        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies','ratingCount','ratingAve'));
     }
 
     public function edit(User $user, Course $course)
@@ -164,5 +153,27 @@ class OnlineCourseController extends Controller
             $imageArray ?? []
         ));
         return redirect()->route('course.show', [$user,$course]);
+    }
+
+    public function courseStar (Request $request, Course $course) {
+        $course = Course::where('id', $course->id)->first();
+        $rating = new Rating;
+        $rating->user_id = Auth::id();
+        $rating->rating = $request->input('star');
+        $course->ratings()->save($rating);
+        return redirect()->back();
+    }
+  
+    public function courseRegister (User $user, Course $course) {
+        $course = Course::where('id', $course->id)->first();
+        DB::table('courseregister')
+                ->insert([
+                    'course_id' => $course->id,
+                    'user_id' => $user->id,
+                    "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
+                    "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
+                ]);
+        
+        return redirect()->route('course.detail', [$user->id,$course->id]);
     }
 }

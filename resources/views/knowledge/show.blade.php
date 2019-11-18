@@ -22,7 +22,25 @@
 
                     </div>   
                 </div>
+                
             </div>         
+
+               
+
+              
+<div class="form-group required">
+        <div class="col-sm-12">
+
+           
+                        
+                          
+                          
+                         
+                          
+                          
+                         </div>
+                      </div>
+             
                 <div class="card mt-4">
                     <div class="card-body">
                         @if (session('status'))
@@ -31,7 +49,7 @@
                             </div>
                         @endif
                             <h3 style="text-align:center">Comment</h3>
-                            <hr>                  
+                            <hr> 
                     <div class="comment-container">   
                         @foreach($comments as $comment)
                             <div class="well">
@@ -54,7 +72,6 @@
                                                     <div class="reply-to-reply-form">
                                             
                                                         <!-- Dynamic Reply form -->
-                                                        
                                                     </div>
                                                     
                                                 </div>
@@ -65,7 +82,8 @@
                             <hr>
                         </div>
                         @endforeach
-                    
+                        
+                        
                         @if ($document->price !== 0)
                                 @if ($docCount == 1)
                                     <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
@@ -166,7 +184,105 @@
             </div>
   
     </div>
+    <div class="card mt-3">
+        <div class="card-body">
+           <h2 style="text-align:center">Reviews</h2>
+           <hr>
+           <div>
+                
+                @if ($ratingAve < 5.00)
+                    @if($ratingAve == 0.00)  
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    @elseif($ratingAve == 1.00)  {{-- Rating = 1 --}}
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>  
+                    @elseif ($ratingAve >= 1.01 && $ratingAve <= 1.99)  {{-- Rating = 1.5 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve == 2.00)  {{-- Rating = 2 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve >= 2.01 && $ratingAve <= 2.99)  {{-- Rating = 2.5 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve == 3.00)  {{-- Rating = 3 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve >= 3.01 && $ratingAve <= 3.99)  {{-- Rating = 3.5 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve == 4)  {{-- Rating = 4 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @elseif ($ratingAve >= 4.01 && $ratingAve <= 4.99)  {{-- Rating = 4.5 --}}
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i> 
+                    @endif
+                @else
+                    {{-- Rating = 5 --}}
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                    <i class="fa fa-star" aria-hidden="true" style="color:#e74c3c;font-size:30px;padding:8px"></i>
+                @endif
+        
+                
+                <strong style="font-size:20px">{{ $ratingAve}}</strong>
+                <div class="ml-2" style="text-align:center"><i class="fa fa-users" aria-hidden="true" style="font-size:35px;"></i><strong style="font-size:15px">{{ $ratingCount}} Person</strong></div>
+        </div>
 
+          <h2 style="text-align:center" class="mt-3">User Rating</h2>
+           <hr>       
+           <form class="form-horizontal" action="{{route('documentStar', $document->id)}}" id="addStar" method="POST">
+            {{ csrf_field() }}
+                  <div class="form-group required">
+                    <div class="col-sm-12">
+                      <input class="star star-5" value="5" id="star-5" type="radio" name="star"/>
+                      <label class="star star-5" for="star-5"></label>
+                      <input class="star star-4" value="4" id="star-4" type="radio" name="star"/>
+                      <label class="star star-4" for="star-4"></label>
+                      <input class="star star-3" value="3" id="star-3" type="radio" name="star"/>
+                      <label class="star star-3" for="star-3"></label>
+                      <input class="star star-2" value="2" id="star-2" type="radio" name="star"/>
+                      <label class="star star-2" for="star-2"></label>
+                      <input class="star star-1" value="1" id="star-1" type="radio" name="star"/>
+                      <label class="star star-1" for="star-1"></label>
+                     </div>
+                  </div>
+          </form>
+          
+          
+        </div>
+</div>
     </div>
 </div>
 

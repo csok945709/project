@@ -2,8 +2,8 @@
 
 namespace App;
 
+use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
 class Document extends Model
 {
@@ -13,6 +13,8 @@ class Document extends Model
         'caption','description','document','price'
     ];
     
+    use Rateable;
+    
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -21,4 +23,6 @@ class Document extends Model
     {
         return $this->hasMany(KnowledgeComment::class)->whereNull('document_id');
     }
+
+  
 }

@@ -1,5 +1,12 @@
 $(document).ready(function(){
         
+    $('#addStar').change('.star', function(e) {
+        if (confirm('Are you sure you want to delete this?')) {
+            $(this).submit();
+        }else{
+            location.reload();
+        }
+    });
 
     $(".comment-container").delegate(".reply","click",function(){
         var well = $(this).parent().parent();
