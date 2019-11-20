@@ -84,7 +84,7 @@ class OnlineCourseController extends Controller
             'course_duration' => $data['duration'],
         ]);
         
-        return  view('onlineCourses/index');
+        return redirect()->route('course.index');
     }
 
     public function courseCat(Request $request)
@@ -106,9 +106,13 @@ class OnlineCourseController extends Controller
         $comments =  CourseComment::latest('created_at')->get();
         $replies =  CourseReply::get();
         $courseRating = Course::where('id', $course->id)->first();
-        $ratingCount = Rating::where('rateable_type', 'App\Course')->count();
+        $ratingCount = Rating::where('rateable_type', 'App\Course')->where('rateable_id', $course->id)->count();
         $ratingAve = number_format($courseRating->userAverageRating, 2);
-        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies','ratingCount','ratingAve'));
+        $courseRegCheck = DB::table('courseregister')->where('user_id', $user)->where('course_id', $course->id)->first();
+        if(empty($courseRegCheck)) {
+            $courseRegCheck = 0;
+        }
+        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies','ratingCount','ratingAve', 'courseRegCheck'));
     }
 
     public function edit(User $user, Course $course)

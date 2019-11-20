@@ -69,6 +69,15 @@ class CoursePayPalController extends Controller
             return back()->withInput()->with('error','Something wrong');
         }
 
+        $course = Course::where('id', $courseID)->first();
+        DB::table('courseregister')
+                ->insert([
+                    'course_id' => $courseID,
+                    'user_id' => $UserId,
+                    "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
+                    "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
+                ]);
+
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             return redirect()->route('course.show', [$UserId, $courseID]);
         }

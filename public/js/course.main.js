@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#addCourseStar').change('.star', function(e) {
-        if (confirm('Are you sure you want to delete this?')) {
+        if (confirm('Are you sure you want to submit ?')) {
             $(this).submit();
         }else{
             location.reload();

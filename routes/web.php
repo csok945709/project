@@ -70,13 +70,15 @@ Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 
 
 //profile
-Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.index');
 Route::get('/profile/{user}/course', 'ProfilesController@indexCourse')->name('profile.indexCourse');
 Route::get('/profile/{user}/course/viewApply', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
+Route::get('/profile/{user}/course/viewOrgCourse', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
 Route::get('/profile/{user}/document', 'ProfilesController@indexDocument')->name('profile.indexDocument');
 Route::get('/profile/{user}/forum', 'ProfilesController@indexForum')->name('profile.indexForum');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
+Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.index');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
+
 
 
 

@@ -77,7 +77,7 @@ class KnowledgesController extends Controller
         $payerId = KnowledgeInvoice::where('document_id', $document->id)->first('buyer_id');
         $docIdCheck =  KnowledgeInvoice::where('document_id', $document->id)->first('document_id',);
         $documentRating = Document::where('id', $document->id)->first();
-        $ratingCount = Rating::where('rateable_type', 'App\Document')->count();
+        $ratingCount = Rating::where('rateable_type', 'App\Document')->where('rateable_id', $document->id)->count();
         $ratingAve = number_format($documentRating->userAverageRating, 2);
         return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount'));
     }
@@ -127,7 +127,6 @@ class KnowledgesController extends Controller
 
     public function documentStar (Request $request, Document $document) {
         $document = Document::where('id', $document->id)->first();
-        dd('i document');
         $rating = new Rating;
         $rating->user_id = Auth::id();
         $rating->rating = $request->input('star');

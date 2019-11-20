@@ -104,24 +104,46 @@
                     <div class="card-body">
                             <h4 style="text-align:center;font-weight:600;">Register Now</h4>
                             <hr>
-                            @if($course->user_id !== Auth::user()->id)
-                            <div style="text-align:center;">  
-                            @if ($course->price !== 0)
-                                @if ($courseCount == 1)
-                                    @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id)
-                                        <strong>Register Success</strong>
-                                    @endif
-                                @else
-                                    <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
-                                    {{-- Need Pay --}}
-                                    <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
-                                @endif
-                                
+                             
+                        @if ($courseRegCheck !== 0)
+                            @if ($courseRegCheck->course_id == $course->id && $courseRegCheck->user_id == Auth::user()->id) 
+                                <strong style="font-size:20px;color:green" class="ml-5">Register Success </strong><i class="fa fa-check" style="font-size:30px;color:green"></i>
                             @else
-                                <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
+                            <div style="text-align:center;">  
+                                @if ($course->price !== 0)
+                                    @if ($courseCount == 1)
+                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id)
+                                            <strong>Register Success</strong>
+                                        @endif
+                                    @else
+                                        <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
+                                        {{-- Need Pay --}}
+                                        <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
+                                    @endif
+                                    
+                            @else
+                                    <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
                             @endif
                             </div>
-                        @endif  
+                            @endif 
+                        @else
+                            <div style="text-align:center;">  
+                                @if ($course->price !== 0)
+                                    @if ($courseCount == 1)
+                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id)
+                                            <strong>Register Success</strong>
+                                        @endif
+                                    @else
+                                        <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
+                                        {{-- Need Pay --}}
+                                        <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
+                                    @endif
+                                    
+                            @else
+                                    <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
+                            @endif
+                            </div>
+                        @endif
                         </div>
             </div>
             <div class="card mt-3">

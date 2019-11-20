@@ -13,7 +13,7 @@
     <h3 style="text-align:center;font-weight:700">Manage My Course</h3>
     <a href="{{ route('profile.indexForum',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Consultant</a>
 
-    <a  href="{{ route('profile.indexCourse',[$user->id]) }}"  id="courseHover" class="btn btn-primary mb-3" style="width:19%">My Course</a>
+    <a  href="{{ route('profile.viewApply', [$user->id]) }}"  id="courseHover" class="btn btn-primary mb-3" style="width:19%">My Course</a>
         
 
     <a  href="{{ route('profile.index',[$user->id]) }}"  class="btn btn-primary mb-3" style="width:19%">Sharing Blog</a>
@@ -27,9 +27,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav" style="margin-left:30%">
-                <a class="nav-item nav-link active" href="{{ route('profile.viewApply', [$user->id]) }}" style="font-weight:600;font-size:16px" >Home <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#" style="font-weight:600;font-size:16px">Features</a>
-                <a class="nav-item nav-link" href="#" style="font-weight:600;font-size:16px">Pricing</a>
+                <a class="nav-item nav-link active" href="{{ route('profile.viewApply', [$user->id]) }}" style="font-weight:600;font-size:16px" >View Register Course <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">View Organized Course</a>              
               </div>
             </div>
           </nav>

@@ -7,7 +7,8 @@ use Intervention\Image\Facades\Image;
 use App\CourseInvoice;
 use App\User;
 use App\Document;
-
+use DB;
+use App\Course;
 class ProfilesController extends Controller
 {
     public function index(User $user)
@@ -38,10 +39,18 @@ class ProfilesController extends Controller
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $user = User::findOrFail($user)->first();
-        $courses = Document::where('user_id', $user)->latest()->paginate(5);
         $applyData = CourseInvoice::all();
-       
-        return view('profiles.course.viewApply',compact('user','courses','follows','applyData'));
+        $courseRegId = DB::table('courseregister')->where('user_id', $user->id)->pluck('course_id')->toArray();
+        $courseRegData = Course::whereIn('id', $courseRegId)->get();
+        return view('profiles.course.viewApply',compact('user','follows','applyData','courseRegData'));
+    }
+    
+    public function manageCourseOraganized(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $user = User::findOrFail($user)->first();
+        $courses = Course::where('user_id', $user->id)->latest()->paginate(5);
+        return view('profiles.course.viewOrgCourse',compact('user','courses','follows'));
     }
 
     public function edit(User $user)
