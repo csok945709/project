@@ -96,7 +96,7 @@
                     <li class="nav-item"><a href="/onlinecourses" class="nav-link">Online Courses</a></li>
                     <li class="nav-item"><a href="/knowledgeMine" class="nav-link">Knowledge Mine</a></li>
                 <li class="nav-item"><a href="/p/index" class="nav-link">Sharing Blog</a></li> {{-- {{ route('profile.index', auth()->user()->id) }} --}}
-                    <li class="nav-item"><a href="/" class="nav-link">Bounty Q & A</a></li>
+                    <li class="nav-item"><a href="{{ route('question.index')}}" class="nav-link">Bounty Q & A</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

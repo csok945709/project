@@ -135,7 +135,12 @@ Route::post('/c/apply/store', 'OrganizerApplyController@store')->name('organizer
 //Consultant
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
-
+//Chat
 Route::get('/chat/{user}', 'ChatsController@index')->name('chat');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
+
+// Bounty Question
+Route::get('/q/index', 'BountyQuestionController@index')->name('question.index');
+Route::get('/q/create', 'BountyQuestionController@create')->name('question.create');
+Route::post('/q', 'BountyQuestionController@store')->name('question.store');
