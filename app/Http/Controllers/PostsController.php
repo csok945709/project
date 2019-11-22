@@ -52,7 +52,7 @@ public function __construct()
 
         // $comments = Comment::latest('created_at')->get();
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $comments =  Comment::latest('created_at')->get();
+        $comments =  Comment::where('post_id', $post->id)->latest('created_at')->get();
         $replies =  Reply::get();
         $viewer = Post::where('id', $post->id)->increment('visit_count');
         return view('posts.show',compact('user','post', 'follows','comments','replies'));

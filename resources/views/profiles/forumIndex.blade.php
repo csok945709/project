@@ -13,7 +13,7 @@
     <a  href="{{ route('profile.viewApply', [$user->id]) }}"  class="btn btn-primary mb-3" style="width:19%">My Course</a>
     <a  href="{{ route('profile.index',[$user->id]) }}"  class="btn btn-primary mb-3" style="width:19%">Sharing Blog</a>
     <a href="{{ route('profile.indexDocument',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Knowledge Mine</a>
-    <a href="{{ route('profile.indexForum',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Bounty Q&A</a>
+    <a href="{{ route('profile.indexQuestion',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Bounty Q&A</a>
     
 @can('update', $user->profile)
 <a href="{{route('post.create')}}" class="btn btn-primary mb-2" style="margin-left: 88%;">Ask New Question</a>

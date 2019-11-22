@@ -9,6 +9,8 @@ use App\User;
 use App\Document;
 use DB;
 use App\Course;
+use App\Question;
+
 class ProfilesController extends Controller
 {
     public function index(User $user)
@@ -25,6 +27,14 @@ class ProfilesController extends Controller
         $user = User::findOrFail($user)->first();
         $documents = Document::where('user_id', $user)->latest()->paginate(5);
         return view('profiles.documentIndex',compact('user','documents','follows'));
+    }
+
+    public function indexQuestion(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $user = User::findOrFail($user)->first();
+        $questions = Question::where('user_id', $user)->latest()->paginate(5);
+        return view('profiles.questionIndex',compact('user','questions','follows'));
     }
 
     public function indexCourse(User $user)

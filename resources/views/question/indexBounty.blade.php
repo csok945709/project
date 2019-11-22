@@ -13,12 +13,13 @@
 
     <div class="row">  
         <div class="col-7 offset-1 ">
-        @if (!empty($questions))
-            @foreach ($questions as $question)
+            @if (!empty($questionsBounty))
+                @foreach ($questionsBounty as $question)
                 <div class="container card mb-3">
                     <div class="card-body">
+                            <div style="float: right;font-size:30px;color:red"><span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i><strong class="pl-2">{{ $question->reward }}</strong></div>
                         <div class="col-7" style="height:150px">
-                            <a href="{{ route('question.show', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
+                            <a href="{{ route('question.showBounty', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
                             <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($question->question_content,$words = 100, $end = '...') !!}</div>
                     </div>
                     <div class="d-flex">   
@@ -30,12 +31,12 @@
                                 <img src="{{ $question->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
                                 <a href="{{ route('profile.index', [$question->user->id]) }}" style="text-decoration:none"><strong style="font-size:12px;"> {{ $question->user->username }} </strong></a>
                             </div>
-                        </div>    
+                        </div>   
                     </div>
                 </div>
-            @endforeach 
-        @else
-            <strong>Now no Question yet...</strong>
+            @endforeach  
+            @else
+            <strong>Now no Question yet...</strong>           
         @endif   
         </div>
             <div class="col-3">

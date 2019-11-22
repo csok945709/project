@@ -73,6 +73,7 @@ Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 Route::get('/profile/{user}/course', 'ProfilesController@indexCourse')->name('profile.indexCourse');
 Route::get('/profile/{user}/course/viewApply', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
 Route::get('/profile/{user}/course/viewOrgCourse', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
+Route::get('/profile/{user}/question', 'ProfilesController@indexQuestion')->name('profile.indexQuestion');
 Route::get('/profile/{user}/document', 'ProfilesController@indexDocument')->name('profile.indexDocument');
 Route::get('/profile/{user}/forum', 'ProfilesController@indexForum')->name('profile.indexForum');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
@@ -101,9 +102,6 @@ Route::resource('/p/{post}/comments','CommentsController');
 Route::resource('/replies','RepliesController');
 
 
-
-
-
 //Online Course
 Route::get('/onlinecourses', 'OnlineCourseController@index')->name('course.index');
 Route::get('/onlinecourses/shop', 'OnlineCourseController@shop')->name('course.shop');
@@ -124,9 +122,9 @@ Route::resource('/coursecomments/replies','CourseRepliesController');
 Route::resource('/c/{course}/coursecomments','CourseCommentsController');
 
 //Online Course paypal
-Route::get('course/payment/success', 'CoursePayPalController@paymentSuccess')->name('coursePayment.success');
-Route::get('cancel', 'CoursePayPalController@cancel')->name('coursePayment.cancel');
 Route::get('course/payment/{course}', 'CoursePayPalController@payment')->name('coursePayment.payment');
+Route::get('course/payment/success', 'CoursePayPalController@paymentSuccess')->name('coursePayment.success');
+Route::get('course/cancel', 'CoursePayPalController@cancel')->name('coursePayment.cancel');
 
 //Organizer Apply 
 Route::get('/c/apply', 'OrganizerApplyController@applyForm')->name('organizer.apply');
@@ -140,7 +138,23 @@ Route::get('/chat/{user}', 'ChatsController@index')->name('chat');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
 
+
+//Bounty Question  paypal
+Route::get('q/payment/success', 'QuestionPayPalController@paymentSuccess')->name('questionPayment.success');
+Route::get('cancel', 'QuestionPayPalController@cancel')->name('questionPayment.cancel');
+Route::get('q/payment/{question}', 'QuestionPayPalController@payment')->name('questionPayment.payment');
 // Bounty Question
 Route::get('/q/index', 'BountyQuestionController@index')->name('question.index');
+Route::get('/q/indexbounty', 'BountyQuestionController@indexFollow')->name('question.indexFollow');
 Route::get('/q/create', 'BountyQuestionController@create')->name('question.create');
+Route::get('/q/{user}/{question}/bounty', 'BountyQuestionController@show')->name('question.show');
 Route::post('/q', 'BountyQuestionController@store')->name('question.store');
+Route::get('/q/{user}/{question}/delete', 'BountyQuestionController@delete')->name('question.delete');
+Route::get('/q/{user}/{question}/edit', 'BountyQuestionController@edit')->name('question.edit');
+Route::patch('/q/{user}/{question}', 'BountyQuestionController@update')->name('question.update');
+Route::get('/q/{user}/{question}', 'BountyQuestionController@show')->name('question.show');
+//Bounty Question Answer
+Route::resource('/questionAnswer','QuestionAnswerController');
+Route::resource('/questionAnswer/replies','QuestionRepliesController');
+Route::resource('/q/{question}/questionAnswer','QuestionAnswerController');
+
