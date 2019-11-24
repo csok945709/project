@@ -37,7 +37,7 @@ class QuestionAnswerController extends Controller
             ]);
             $question = $question->id;
             $user = auth()->user()->id;
-            return redirect()->route('question.showBounty', compact('question','user'))->with('success','Answer submit successfully..!');
+            return redirect()->route('question.show', compact('question','user'))->with('success','Answer submit successfully..!');
         }else{
             return back()->withInput()->with('error','Something wrong');
         }

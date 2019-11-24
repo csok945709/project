@@ -8,7 +8,7 @@
 <div class="col-7 offset-1">
     <h3 style="text-align:center;font-weight:700">Question Forum</h3>
     <a  href="{{ route('question.index') }}"  class="btn btn-primary mb-3" style="width:50%">Question</a>
-    <a href="{{ route('question.indexFollow') }}"  class="btn btn-success mb-3" style="width:49%">Bounty Question</a>
+    <a href="{{ route('question.indexBounty') }}"  class="btn btn-success mb-3" style="width:49%">Bounty Question</a>
 </div>
 
     <div class="row">  

@@ -20,10 +20,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
-
-
 //Admin
 Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
@@ -43,8 +39,6 @@ Route::get('/home/{user}', 'HomeController@index')->name('home.index');
 
 //About Us
 Route::get('/about', 'HomeController@about')->name('about');
-
-
 
 //Knowledge Mine
 Route::get('/knowledgeMine', 'KnowledgesController@index')->name('document.index');
@@ -141,13 +135,14 @@ Route::post('messages', 'ChatsController@sendMessage');
 
 //Bounty Question  paypal
 Route::get('q/payment/success', 'QuestionPayPalController@paymentSuccess')->name('questionPayment.success');
-Route::get('cancel', 'QuestionPayPalController@cancel')->name('questionPayment.cancel');
 Route::get('q/payment/{question}', 'QuestionPayPalController@payment')->name('questionPayment.payment');
+Route::get('cancel', 'QuestionPayPalController@cancel')->name('questionPayment.cancel');
 // Bounty Question
 Route::get('/q/index', 'BountyQuestionController@index')->name('question.index');
-Route::get('/q/indexbounty', 'BountyQuestionController@indexFollow')->name('question.indexFollow');
+Route::get('/q/indexbounty', 'BountyQuestionController@indexFollow')->name('question.indexBounty');
 Route::get('/q/create', 'BountyQuestionController@create')->name('question.create');
-Route::get('/q/{user}/{question}/bounty', 'BountyQuestionController@show')->name('question.show');
+Route::get('/q/bounty/{user}/{question}', 'BountyQuestionController@show')->name('question.show');
+Route::get('/q/rewardAnswer/{user}/{answer}/{question}', 'BountyQuestionController@rewardAnswer')->name('question.rewardAnswer');
 Route::post('/q', 'BountyQuestionController@store')->name('question.store');
 Route::get('/q/{user}/{question}/delete', 'BountyQuestionController@delete')->name('question.delete');
 Route::get('/q/{user}/{question}/edit', 'BountyQuestionController@edit')->name('question.edit');

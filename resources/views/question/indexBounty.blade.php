@@ -8,7 +8,7 @@
 <div class="col-7 offset-1">
     <h3 style="text-align:center;font-weight:700">Question Forum</h3>
     <a  href="{{ route('question.index') }}"  class="btn btn-primary mb-3" style="width:50%">Question</a>
-    <a href="{{ route('question.indexFollow') }}"  class="btn btn-success mb-3" style="width:49%">Bounty Question</a>
+    <a href="{{ route('question.indexBounty') }}"  class="btn btn-success mb-3" style="width:49%">Bounty Question</a>
 </div>
 
     <div class="row">  
@@ -17,9 +17,15 @@
                 @foreach ($questionsBounty as $question)
                 <div class="container card mb-3">
                     <div class="card-body">
-                            <div style="float: right;font-size:30px;color:red"><span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i><strong class="pl-2">{{ $question->reward }}</strong></div>
+                        @foreach ($rewards as $reward)
+                            @if ($reward->question_id == $question->id)
+                                <div style="float: right;"><strong  class="btn btn-success" style="float: right;" diasble>Solved Question</strong></div>
+                            @else
+                                <div style="float: right;font-size:30px;color:red"><span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i><strong class="pl-2">{{ $question->reward }}</strong></div>
+                            @endif
+                        @endforeach
                         <div class="col-7" style="height:150px">
-                            <a href="{{ route('question.showBounty', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
+                            <a href="{{ route('question.show', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
                             <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($question->question_content,$words = 100, $end = '...') !!}</div>
                     </div>
                     <div class="d-flex">   

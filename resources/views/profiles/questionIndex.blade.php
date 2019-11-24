@@ -30,17 +30,19 @@
                 style="background: white;"
             @endif>
                 <div class="card-body">  
-                    @if ($question->paid == 1 && $question->question_type == 0)
-                        <strong style="float: right;color: green;font-size:25px">Free Question</strong>      
-                        @if ($question->question_type == 1)
+                    @if ($question->question_type == 1)  
+                        @if ($question->question_type == 1 && $question->paid == 1)
                             <strong style="float: right;color: green;font-size:25px">Paid</strong> 
+                        @else
+                            <div style="float: right;"> 
+                                <strong style="color: red;font-size:25px">Pending to Pay</strong><br>
+                                <a href="{{ route('questionPayment.payment',[$question->id]) }}"  class="btn btn-primary mt-2 ml-5" style="width:75%">PayPal Now</a><br>
+                                <a href="{{ route('question.edit', [$user->id, $question->id]) }}" class="btn btn-danger mt-2 ml-5" style="width:75%">Remove Bounty</a>
+                            </div>
                         @endif
                     @else
-                        <div style="float: right;">
-                            <strong style="color: red;font-size:25px">Pending to Pay</strong><br>
-                        <a href="{{ route('questionPayment.payment',[$question->id]) }}" class="btn btn-primary mt-2 ml-5" style="width:75%">PayPal Now</a><br>
-                        <a href="{{ route('question.edit', [$user->id, $question->id]) }}" class="btn btn-danger mt-2 ml-5" style="width:75%">Remove Bounty</a>
-                        </div>
+                        <strong style="float: right;color: green;font-size:25px">Free Question</strong>      
+                          
                     @endif
                 <a href="{{ route('question.show', [$user->id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
                     <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($question->question_content,$words = 100, $end = '...') !!}</div>

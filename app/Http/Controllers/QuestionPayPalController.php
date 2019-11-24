@@ -7,6 +7,7 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use Illuminate\Support\Facades\Auth;
 use App\Question;
+use App\QuestionInvoice;
 
 class QuestionPayPalController extends Controller
 {
@@ -15,7 +16,8 @@ class QuestionPayPalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+
+
      public function payment(Question $question)
     {
         $price = $question->reward;
@@ -35,27 +37,25 @@ class QuestionPayPalController extends Controller
         $data['return_url'] = route('questionPayment.success');
         $data['cancel_url'] = route('questionPayment.cancel');
         $data['total'] = $price;
-  
         $provider = new ExpressCheckout;
         $response = $provider->setExpressCheckout($data);
-    
         // This will redirect user to PayPal
         return redirect($response['paypal_link']);
     }
     public function paymentSuccess(Request $request)
     {   
+       
         $token = $request->token;
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($token);
-        $courseID = (int)$response['L_DESC0'];
+        $questionID = (int)$response['L_DESC0'];
         $amount = (int)$response['AMT'];
         $PayerID = $response['PAYERID'];
         $UserId = Auth::user()->id;
-        
         if (Auth::check()) {
           
-            CourseInvoice::create([
-                'course_id' => $courseID,
+            QuestionInvoice::create([
+                'question_id' => $questionID,
                 'buyer_id' => $UserId,
                 'paypal_payer_id' => $PayerID,
                 'price' => $amount,
@@ -64,18 +64,19 @@ class QuestionPayPalController extends Controller
         }else{
             return back()->withInput()->with('error','Something wrong');
         }
-
-        $course = Course::where('id', $courseID)->first();
-        DB::table('courseregister')
-                ->insert([
-                    'course_id' => $courseID,
-                    'user_id' => $UserId,
-                    "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
-                    "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
-                ]);
-
+        $question = Question::where('id', $questionID)->where('user_id', $UserId)->update([
+            'paid' => 1
+        ]);
+        
+        // DB::table('courseregister')
+        //         ->insert([
+        //             'course_id' => $questionID,
+        //             'user_id' => $UserId,
+        //             "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
+        //             "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
+        //         ]);
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
-            return redirect()->route('course.show', [$UserId, $courseID]);
+            return redirect()->route('profile.indexQuestion', [$UserId]);
         }
   
         dd('Something is wrong.');
@@ -97,5 +98,3 @@ class QuestionPayPalController extends Controller
      * @return \Illuminate\Http\Response
      */
 }
-    
-

@@ -9,13 +9,19 @@
                <div style="text-align:center">
                     <h1>Online Consultant</h1> 
                </div>
-                    <select id="courseCat" class="form-control">
-                    <option selected disabled>Select a type</option>
-                        @foreach ($courseCategory as $courseCat)
-                            <option class="option" id="cat{{$courseCat->id}}" value="{{$courseCat->id}}">{{$courseCat->name}}</option>
-                        @endforeach
-                    </select>
-                       
+              
+                    <div class="d-flex">
+                        <select id="courseCat" class="form-control mr-3" style="width:50%">
+                            <option selected disabled>Select a type</option>
+                            @foreach ($courseCategory as $courseCat)
+                                <option class="option" id="cat{{$courseCat->id}}" value="{{$courseCat->id}}">{{$courseCat->name}}</option>
+                            @endforeach
+                        </select>
+                        <a href="#" class="btn btn-danger mr-3" style="width:20%;">Apply Consultant</a>
+                        <a href="#" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</a>
+                    </div>
+                 
+                    
                             <div class="ml-10">
                                 @foreach ($profiles as $profile)
                                     <div class="card col-3 mt-4 ml-5" style="display:inline-block;padding:0px !important;">

@@ -11,10 +11,10 @@
                         <a href="{{route('question.edit',[$questionData->user->id, $questionData->id])}}" class="btn btn-success" style="float: right;color:white;margin-right:8px;">Edit Question</a>
                     @endcan
                     <strong style="font-size:28px;font-weight:900">{{ $questionData->question_caption }}</strong> 
-                    <div style="float: right;font-size:30px;color:red">
-                            <span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i>
-                            <strong class="pl-2">{{ $questionData->reward }}</strong>
-                        </div>
+                    <div style="float: right;font-size:30px;color:red;margin-left: 28%">
+                        <span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i>
+                        <strong class="pl-2">{{ $questionData->reward }}</strong>
+                    </div>
                     <div class="d-flex">   
                         <div class="pr-4"><strong >{{ $questionData->created_at }}</strong></div>
                         <div class="pr-4"><strong >989</strong> Like</div>
@@ -38,14 +38,32 @@
                     <div class="comment-container">   
                                     @foreach($answers as $answer)
                                         <div class="well">
-                                                <img src="{{ $answer->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
-                                                <i><b> {{ $answer->name }} </b></i>&nbsp;&nbsp;
-                                                <span> {{ $answer->answer }} </span>
-                                                <div style="margin-left:10px;">
-                                                        <a style="cursor: pointer;" cid="{{ $answer->id }}" name_a="{{ Auth::user()->username }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
-                                                        <a style="cursor: pointer;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $answer->id }}">Delete</a>
-                                                        <div class="reply-form">
-                                                    <!-- Dynamic Reply form -->                                   
+                                               
+                                                    <span class="mr-2 mb-3">
+                                                        <img src="{{ $answer->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
+                                                        <i><b> {{ $answer->name }} </b></i>&nbsp;&nbsp;
+                                                    </span>
+                                                
+                                                     {{ $answer->answer }} 
+                                                
+                                                    <div style="margin-left:10px;margin-top:10px;">
+                                                        @foreach ($rewards as $reward)
+                                                            @if (!empty($reward))
+                                                                @if ($reward->reward_user == $answer->user_id)
+                                                                    <strong  class="btn btn-success" style="float: right;" diasble>Best Answer</strong>
+                                                                @endif
+                                                            @else
+                                                                <a href="{{ route('question.rewardAnswer', [$answer->user->id, $answer->id, $questionData->id]) }}" class="btn btn-primary" style="float: right;">Select as Best Answer</a>
+                                                            @endif   
+                                                        @endforeach
+                                                         
+                                                    
+                                                            <a style="cursor: pointer;font-weight:600;" cid="{{ $answer->id }}" name_a="{{ Auth::user()->username }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
+                                                            <a style="cursor: pointer;font-weight:600;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $answer->id }}">Delete</a>
+                                                            {{ $answer->updated_at }} 
+                                                            <div class="reply-form">
+                                                        <!-- Dynamic Reply form -->                                   
+                                                    
                                                 </div>
                                                     @foreach($replies as $rep)
                                                         @if($answer->id === $rep->questionanswer_id)
@@ -67,7 +85,7 @@
                                                     @endforeach
                                                 </div>
                                        
-                                        <hr>
+                                        <hr style="margin-top:30px">
                                     </div>
                                     @endforeach
                                 
@@ -81,7 +99,7 @@
                                             </div>
                                             <div style="padding: 0 10px 0 10px;">
                                                 <div class="form-group">
-                                                    <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
+                                                    <input type="submit" class="btn btn-primary" style="width: 100%" name="submit" value="Post Your Answer">
                                                 </div>
                                             </div>
                                         </form>

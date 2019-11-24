@@ -7,6 +7,7 @@ use App\Question;
 use App\User;
 use App\QuestionAnswer;
 use App\AnswerReply;
+use App\Reward;
 
 class BountyQuestionController extends Controller
 {
@@ -18,8 +19,9 @@ class BountyQuestionController extends Controller
 
     public function indexFollow()
     {
+        $rewards = Reward::all();
         $questionsBounty = Question::where('question_type', '1')->where('paid', '1')->get();
-        return view('question/indexBounty', compact('questionsBounty'));
+        return view('question/indexBounty', compact('questionsBounty', 'rewards'));
     }
 
     public function create()
@@ -54,6 +56,7 @@ class BountyQuestionController extends Controller
         $user = Auth::user()->id;
         return redirect()->route('profile.indexQuestion', compact('user'));
     }
+
     public function show(User $user, Question $question)
     {
         $viewer = Question::where('id', $question->id)->increment('visit_count');
@@ -61,23 +64,14 @@ class BountyQuestionController extends Controller
         $questionData = Question::where('id', $question->id)->first();
         $answers =  QuestionAnswer::where('question_id', $question->id)->latest('created_at')->get();
         $replies = AnswerReply::get();
-        if ($questionData->question_type !== 0) {
-            return view('question/showBounty', compact('questionData', 'follows','answers','replies'));
+        $rewards = Reward::where('question_id',  $question->id)->get();
+        if ($questionData->question_type == 1 & $questionData->paid == 1) {
+            return view('question/showBounty', compact('questionData', 'follows','answers','replies', 'rewards'));
         } else {
             return view('question/show', compact('questionData', 'follows','answers','replies'));
         }
     }
 
-    // public function showBounty(User $user, Question $question)
-    // {
-    //     $viewer = Question::where('id', $question->id)->increment('visit_count');
-    //     $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-    //     $questionData = Question::where('id', $question->id)->first();
-    //     $answers =  QuestionAnswer::where('question_id', $question->id)->latest('created_at')->get();
-    //     $replies = AnswerReply::get();
-    //     return view('question/showBounty', compact('questionData', 'follows','answers','replies'));
-    // }
-    
     public function payment(User $user, Question $question)
     {
         
@@ -123,5 +117,17 @@ class BountyQuestionController extends Controller
 
         Question::where('user_id',$user->id)->where('id',$question->id)->delete();
         return redirect()->route('profile.indexQuestion', [$user->id]);
+    }
+
+    public function rewardAnswer(User $user, QuestionAnswer $answer, Question $question)
+    {
+       auth()->user()->rewards()->create([
+        'question_id' => $question->id,
+        'answer_id' =>$answer->id,
+        'reward_user' => $user->id,
+        'reward' => $question->reward
+    ]);
+
+        return redirect()->route('question.show', [Auth::user()->id, $question->id]);
     }
 }
