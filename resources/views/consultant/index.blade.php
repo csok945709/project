@@ -17,8 +17,20 @@
                                 <option class="option" id="cat{{$courseCat->id}}" value="{{$courseCat->id}}">{{$courseCat->name}}</option>
                             @endforeach
                         </select>
-                        <a href="#" class="btn btn-danger mr-3" style="width:20%;">Apply Consultant</a>
-                        <a href="#" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</a>
+                        @if (Auth::user()->consultant == false)
+                            @if ($consultant_applies->isEmpty())
+                                <a href="{{route('consultant.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Apply Consultant</a>
+                            @else
+                                @foreach ($consultant_applies as $consultant_applie)
+                                    @if ($consultant_applie->user_id == Auth::user()->id)
+                                        <a href="{{route('consultant.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Edit Apply</a>
+                                    @endif
+                                @endforeach
+                            @endif     
+                        @else
+                            <a href="#" class="btn btn-success mr-3"  style="width:20%;">Success</a>                  
+                        @endif
+                            <a href="#" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</a>
                     </div>
                  
                     
@@ -32,7 +44,7 @@
                                             <i class="fas fa-map-marker-alt" style="color:grey"></i> <br/>
                                             {!! str_limit($profile->description,$words = 30, $end = '...') !!}
                                             <div class="d-flex">
-                                                <strong>225</strong>Chat &nbsp; 
+                                                <strong>225</strong>Chat &nbsp;
                                                 <strong>9.2</strong>Rating
                                             </div>
                                         </div>

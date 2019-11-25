@@ -21,21 +21,21 @@ class QuestionPayPalController extends Controller
      public function payment(Question $question)
     {
         $price = $question->reward;
-        $courseID = $question->id;
+        $QuestionID = $question->id;
         $title = $question->question_caption;
         $data = [];
         $data['items'] = [
             [
                 'name' => $title,
                 'price' => $price,
-                'desc'  => $courseID,
+                'desc'  => $QuestionID,
                 'qty' => 1,
             ]
         ];
         $data['invoice_id'] = uniqid();
         $data['invoice_description'] = "Order #{$data['invoice_id']} Invoice";
         $data['return_url'] = route('questionPayment.success');
-        $data['cancel_url'] = route('questionPayment.cancel');
+        $data['cancel_url'] = route('questionPayment.cancelPayment');
         $data['total'] = $price;
         $provider = new ExpressCheckout;
         $response = $provider->setExpressCheckout($data);
@@ -44,7 +44,6 @@ class QuestionPayPalController extends Controller
     }
     public function paymentSuccess(Request $request)
     {   
-       
         $token = $request->token;
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($token);
@@ -61,20 +60,17 @@ class QuestionPayPalController extends Controller
                 'price' => $amount,
                
             ]);
+
+            Question::where('id', $questionID)->where('user_id', $UserId)->update([
+                'paid' => 1
+            ]);
+            
         }else{
             return back()->withInput()->with('error','Something wrong');
         }
-        $question = Question::where('id', $questionID)->where('user_id', $UserId)->update([
-            'paid' => 1
-        ]);
         
-        // DB::table('courseregister')
-        //         ->insert([
-        //             'course_id' => $questionID,
-        //             'user_id' => $UserId,
-        //             "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
-        //             "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
-        //         ]);
+        
+        
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             return redirect()->route('profile.indexQuestion', [$UserId]);
         }
@@ -87,7 +83,7 @@ class QuestionPayPalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancel()
+    public function cancelPayment()
     {
         dd('Your payment is canceled. You can create cancel page here.');
     }

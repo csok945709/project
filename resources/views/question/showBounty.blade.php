@@ -47,17 +47,20 @@
                                                      {{ $answer->answer }} 
                                                 
                                                     <div style="margin-left:10px;margin-top:10px;">
-                                                        @foreach ($rewards as $reward)
-                                                            @if (!empty($reward))
-                                                                @if ($reward->reward_user == $answer->user_id)
-                                                                    <strong  class="btn btn-success" style="float: right;" diasble>Best Answer</strong>
-                                                                @endif
-                                                            @else
+                                                       
+                                                            @if ($rewards->isEmpty())
                                                                 <a href="{{ route('question.rewardAnswer', [$answer->user->id, $answer->id, $questionData->id]) }}" class="btn btn-primary" style="float: right;">Select as Best Answer</a>
+                                                            @else
+                                                                @foreach ($rewards as $reward)
+                                                                    @if ($reward->reward_user == $answer->user_id && $reward->answer_id == $answer->id)
+                                                                        <strong  class="btn btn-success" style="float: right;" diasble>Best Answer</strong>
+                                                                    @else
+                                                                        @if (empty($reward->answer_id))
+                                                                            <a href="{{ route('question.rewardAnswer', [$answer->user->id, $answer->id, $questionData->id]) }}" class="btn btn-primary" style="float: right;">Select as Best Answer</a>
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
                                                             @endif   
-                                                        @endforeach
-                                                         
-                                                    
                                                             <a style="cursor: pointer;font-weight:600;" cid="{{ $answer->id }}" name_a="{{ Auth::user()->username }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
                                                             <a style="cursor: pointer;font-weight:600;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $answer->id }}">Delete</a>
                                                             {{ $answer->updated_at }} 

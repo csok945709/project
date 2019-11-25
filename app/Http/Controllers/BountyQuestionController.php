@@ -19,7 +19,7 @@ class BountyQuestionController extends Controller
 
     public function indexFollow()
     {
-        $rewards = Reward::all();
+        $rewards = Reward::get();
         $questionsBounty = Question::where('question_type', '1')->where('paid', '1')->get();
         return view('question/indexBounty', compact('questionsBounty', 'rewards'));
     }
@@ -126,6 +126,10 @@ class BountyQuestionController extends Controller
         'answer_id' =>$answer->id,
         'reward_user' => $user->id,
         'reward' => $question->reward
+    ]);
+
+    auth()->user()->questions()->update([
+        'solved' => '1',
     ]);
 
         return redirect()->route('question.show', [Auth::user()->id, $question->id]);

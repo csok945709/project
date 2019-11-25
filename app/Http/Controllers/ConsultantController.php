@@ -9,9 +9,7 @@ use App\Course_Category;
 use App\Profile;
 use App\User;
 use App\OrganizerApply;
-use App\CourseInvoice;
-use App\CourseReply;
-use App\CourseComment;
+use App\ConsultantApply;
 
 class ConsultantController  extends Controller
 {
@@ -35,7 +33,8 @@ class ConsultantController  extends Controller
         $OrgForm = OrganizerApply::all();
         $courseCategory = Course_Category::all();
         $profiles = Profile::get();
-        return view('consultant/index', compact('profiles', 'courseCategory','OrgForm'));
+        $consultant_applies  = ConsultantApply::get();
+        return view('consultant/index', compact('profiles', 'courseCategory','OrgForm','consultant_applies'));
     }
 
     public function show(User $user)

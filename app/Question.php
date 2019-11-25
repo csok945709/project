@@ -9,7 +9,7 @@ class Question extends Model
     protected $table = "questions";
 
     protected $fillable = [
-        'question_caption','question_content','question_type','reward', 'paid'
+        'question_caption','question_content','question_type','reward', 'paid','solved'
     ];
         
     public function user(){

@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->boolean('question_type');
             $table->integer('reward')->default(0);
             $table->boolean('paid');
+            $table->boolean('solved')->default(0);
             $table->integer('visit_count')->default(0);
             $table->timestamps();
         });

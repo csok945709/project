@@ -25,7 +25,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $applyData = OrganizerApply::all();
+        $applyData = OrganizerApply::get();
         return view('admin.index', compact('applyData'));
     }
 

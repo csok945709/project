@@ -33,7 +33,6 @@ Route::prefix('admin')->group(function() {
 
 
 
-
 //Home Page
 Route::get('/home/{user}', 'HomeController@index')->name('home.index');
 
@@ -124,19 +123,22 @@ Route::get('course/cancel', 'CoursePayPalController@cancel')->name('coursePaymen
 Route::get('/c/apply', 'OrganizerApplyController@applyForm')->name('organizer.apply');
 Route::post('/c/apply/store', 'OrganizerApplyController@store')->name('organizer.store');
 
+//Consultant Apply 
+Route::get('/consultant/apply', 'ConsultantApplyController@applyForm')->name('consultant.apply');
+Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name('consultant.store');
 //Consultant
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
+
 //Chat
 Route::get('/chat/{user}', 'ChatsController@index')->name('chat');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
 
-
 //Bounty Question  paypal
-Route::get('q/payment/success', 'QuestionPayPalController@paymentSuccess')->name('questionPayment.success');
-Route::get('q/payment/{question}', 'QuestionPayPalController@payment')->name('questionPayment.payment');
-Route::get('cancel', 'QuestionPayPalController@cancel')->name('questionPayment.cancel');
+Route::get('question/payment/success', 'QuestionPayPalController@paymentSuccess')->name('questionPayment.success');
+Route::get('question/payment/{question}', 'QuestionPayPalController@payment')->name('questionPayment.payment');
+Route::get('cancelPayment', 'QuestionPayPalController@cancelPayment')->name('questionPayment.cancelPayment');
 // Bounty Question
 Route::get('/q/index', 'BountyQuestionController@index')->name('question.index');
 Route::get('/q/indexbounty', 'BountyQuestionController@indexFollow')->name('question.indexBounty');
@@ -148,8 +150,10 @@ Route::get('/q/{user}/{question}/delete', 'BountyQuestionController@delete')->na
 Route::get('/q/{user}/{question}/edit', 'BountyQuestionController@edit')->name('question.edit');
 Route::patch('/q/{user}/{question}', 'BountyQuestionController@update')->name('question.update');
 Route::get('/q/{user}/{question}', 'BountyQuestionController@show')->name('question.show');
+
+
+
 //Bounty Question Answer
 Route::resource('/questionAnswer','QuestionAnswerController');
 Route::resource('/questionAnswer/replies','QuestionRepliesController');
 Route::resource('/q/{question}/questionAnswer','QuestionAnswerController');
-

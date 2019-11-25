@@ -17,13 +17,19 @@
                 @foreach ($questionsBounty as $question)
                 <div class="container card mb-3">
                     <div class="card-body">
-                        @foreach ($rewards as $reward)
-                            @if ($reward->question_id == $question->id)
-                                <div style="float: right;"><strong  class="btn btn-success" style="float: right;" diasble>Solved Question</strong></div>
-                            @else
+                       
+                            @if ($rewards->isEmpty())
                                 <div style="float: right;font-size:30px;color:red"><span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i><strong class="pl-2">{{ $question->reward }}</strong></div>
+                                @else
+                                @foreach ($rewards as $reward)
+                                    @if ($reward->question_id == $question->id && $question->solved == true)
+                                        <div style="float: right;"><strong  class="btn btn-success" style="float: right;" diasble>Solved Question</strong></div>
+                                    @else 
+                                        <div style="float: right;font-size:30px;color:red"><span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i><strong class="pl-2">{{ $question->reward }}</strong></div>
+                                    @endif
+                            @endforeach
                             @endif
-                        @endforeach
+                       
                         <div class="col-7" style="height:150px">
                             <a href="{{ route('question.show', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
                             <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($question->question_content,$words = 100, $end = '...') !!}</div>

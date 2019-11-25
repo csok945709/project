@@ -32,7 +32,7 @@
         <a class="navbar-brand mr-1" href="{{route('admin.index')}}">IT Knowledge Sharing System</a>
         
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-              <i class="fas fa-bars"></i>
+              <i class="fa fa-bars"></i>
             </button>
         
             <!-- Navbar Search -->
@@ -41,7 +41,7 @@
                 <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
+                    <i class="fa fa-search"></i>
                   </button>
                 </div>
               </div>
@@ -51,7 +51,7 @@
             <ul class="navbar-nav ml-auto ml-md-0">
               <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-bell fa-fw"></i>
+                  <i class="fa fa-bell fa-fw"></i>
                   <span class="badge badge-danger">9+</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
@@ -63,7 +63,7 @@
               </li>
               <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-envelope fa-fw"></i>
+                  <i class="fa fa-envelope fa-fw"></i>
                   <span class="badge badge-danger">7</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
@@ -75,7 +75,7 @@
               </li>
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user-circle fa-fw"></i>
+                  <i class="fa fa-user-circle fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="#">Settings</a>
