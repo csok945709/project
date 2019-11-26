@@ -20,6 +20,12 @@ class ProfilesController extends Controller
         return view('profiles.blogIndex',compact('user', 'follows'));
     }
 
+    public function consultantTime(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $user = User::findOrFail($user)->first();
+        return view('profiles.consultantTime',compact('user', 'follows'));
+    }
 
     public function indexDocument(User $user)
     {

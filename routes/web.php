@@ -67,13 +67,14 @@ Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 
 
 //profile
-Route::get('/profile/{user}/course', 'ProfilesController@indexCourse')->name('profile.indexCourse');
-Route::get('/profile/{user}/course/viewApply', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
-Route::get('/profile/{user}/course/viewOrgCourse', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
-Route::get('/profile/{user}/question', 'ProfilesController@indexQuestion')->name('profile.indexQuestion');
-Route::get('/profile/{user}/document', 'ProfilesController@indexDocument')->name('profile.indexDocument');
-Route::get('/profile/{user}/forum', 'ProfilesController@indexForum')->name('profile.indexForum');
-Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
+Route::get('/profile/course/{user}', 'ProfilesController@indexCourse')->name('profile.indexCourse');
+Route::get('/profile/course/viewApply/{user}', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
+Route::get('/profile/course/viewOrgCourse/{user}', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
+Route::get('/profile/consultant/consultantTime/{user}', 'ProfilesController@consultantTime')->name('profile.consultantTime');
+Route::get('/profile/question/{user}', 'ProfilesController@indexQuestion')->name('profile.indexQuestion');
+Route::get('/profile/document/{user}', 'ProfilesController@indexDocument')->name('profile.indexDocument');
+Route::get('/profile/forum/{user}', 'ProfilesController@indexForum')->name('profile.indexForum');
+Route::get('/profile/edit/{user}', 'ProfilesController@edit')->name('profile.edit');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.index');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
 
@@ -131,6 +132,7 @@ Route::post('/c/apply/store', 'OrganizerApplyController@store')->name('organizer
 Route::get('/consultant/apply', 'ConsultantApplyController@applyForm')->name('consultant.apply');
 Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name('consultant.store');
 //Consultant
+Route::get('/consultant/manageAppointmentTime', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
 

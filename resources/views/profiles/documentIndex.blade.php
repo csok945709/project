@@ -8,7 +8,7 @@
     
 <div class="col-12">
     <h3 style="text-align:center;font-weight:700">Manage Document</h3>
-    <a href="{{ route('profile.indexForum',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Consultant</a>
+    <a href="{{ route('profile.consultantTime',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Consultant</a>
     <a  href="{{ route('profile.viewApply', [$user->id]) }}"  class="btn btn-primary mb-3" style="width:19%">My Course</a>
     <a  href="{{ route('profile.index',[$user->id]) }}"  class="btn btn-primary mb-3" style="width:19%">Sharing Blog</a>
     <a href="{{ route('profile.indexDocument',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Knowledge Mine</a>

@@ -1,0 +1,40 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
+
+    <div class="row">
+        
+        <div class="col-12">
+               <div style="text-align:center">
+                    <h1>Manage Appointment Time</h1> 
+               </div>
+               <div class="d-flex" style="float: right;">
+                    <a href="#" class="btn btn-primary mr-2">Manage Appointment Time</a>
+                    <a href="#" class="btn btn-success">View Appointment Schedule</a>
+               </div>
+               <div id='calendar' class="mt-5"></div>
+                
+                    
+            </div>
+      
+    </div>
+</div>
+@endsection
+@section('javascript')
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            // page is now ready, initialize the calendar...
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                defaultView: 'agendaWeek',
+                events : [
+                    
+                ]
+            })
+        });
+    </script>
+@endsection
