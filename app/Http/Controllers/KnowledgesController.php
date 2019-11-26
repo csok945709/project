@@ -53,8 +53,8 @@ class KnowledgesController extends Controller
             'description' => 'required',
             'document' => ['required', 'mimes:doc,pdf,docx,zip,ppt,pptx'],
         ]);
-        
         $documentPath = request('document')->store('document','public');
+        $documentFile = Document::make(public_path("/storage/{$documentPath}"));
         $price = request('price', 0);
         
         auth()->user()->documents()->create([
@@ -113,7 +113,7 @@ class KnowledgesController extends Controller
 
         if (request('document')) {
             $documentPath = request('document')->store('document','public');
-
+            $documentFile = Document::make(public_path("/storage/{$documentPath}"));
             $documentArray = ['document' => $documentPath];
         }
         auth()->user()->documents()->update(array_merge(

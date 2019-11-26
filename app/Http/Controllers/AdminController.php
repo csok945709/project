@@ -23,13 +23,38 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
         $applyData = OrganizerApply::get();
         return view('admin.index', compact('applyData'));
     }
+    
+    public function userDetail()
+    {
+        $users = User::get();
+        return view('admin.userDetail', compact('users'));
+    }
+    
+    public function organizerDetail()
+    {
+        $users = User::where('organizer', true)->get();
+        return view('admin.organizerDetail', compact('users'));
+    }
 
-    public function approve(User $orgApply)
+    public function consultantDetail()
+    {
+        $users = User::where('consultant', true)->get();
+        return view('admin.consultantDetail', compact('users'));
+    }
+    
+    public function approveOrgIndex()
+    {
+        $applyData = OrganizerApply::get();
+        return view('admin.organizerApprove', compact('applyData'));
+    }
+
+    public function approveOrganizer(User $orgApply)
     {
         $orgApplyId = $orgApply->id;
         $orgApply = OrganizerApply::where('user_id', $orgApplyId)->first();
@@ -40,7 +65,7 @@ class AdminController extends Controller
         $userOrg->organizer = 1;
         $userOrg->save();  
         $applyData = OrganizerApply::all();
-        return view('admin.index', compact('orgApplyId', 'applyData'));
+        return view('admin.organizerApprove', compact('orgApplyId', 'applyData'));
     }
 
     public function show(User $orgApply)

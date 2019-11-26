@@ -26,8 +26,12 @@ Route::prefix('admin')->group(function() {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/', 'AdminController@index')->name('admin.index');
-    Route::get('/orgApprove/{orgApply}/show', 'AdminController@show')->name('admin.showOrg');
-    Route::get('/orgApprove/{orgApply}', 'AdminController@approve')->name('admin.approve');
+    Route::get('/userDetail', 'AdminController@userDetail')->name('admin.userDetail');
+    Route::get('/consultantDetail', 'AdminController@consultantDetail')->name('admin.consultantDetail');
+    Route::get('/organizerDetail', 'AdminController@organizerDetail')->name('admin.organizerDetail');
+    Route::get('/approveOrganizer', 'AdminController@approveOrgIndex')->name('admin.approveOrgIndex');
+    Route::get('/approveOrganizer/show/{orgApply}', 'AdminController@show')->name('admin.showOrg');
+    Route::get('/approveOrganizer/{orgApply}', 'AdminController@approveOrganizer')->name('admin.approveOrganizer');
     
 });
 

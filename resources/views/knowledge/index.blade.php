@@ -16,11 +16,11 @@
                                 <div class="col-md-2" style="float: left;">
                                         <?php $path_parts = pathinfo($document->document );
                                         if ($path_parts['extension'] == "doc") {
-                                            echo '<img src="/storage/document/docx.png" style="width:80px;height:auto;float: right;margin-top:5px;" />';
+                                            echo '<img src="/picture/docx.png" style="width:80px;height:auto;float: right;margin-top:5px;" />';
                                         } elseif ($path_parts['extension'] == "pdf") {
-                                            echo '<img src="/storage/document/pdf.png" style="width:80px;height:auto;" />';
+                                            echo '<img src="/picture/pdf.png" style="width:80px;height:auto;" />';
                                         } elseif ($path_parts['extension'] == "docx") {
-                                            echo '<img src="/storage/document/docx.png" style="width:80px;height:auto;margin-top: 20px;" />';
+                                            echo '<img src="/picture/docx.png" style="width:80px;height:auto;margin-top: 20px;" />';
                                         }
                                     ?> 
                                     </div>
