@@ -17,7 +17,7 @@ class CreateWorkingHoursTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('consultant_id');
             $table->date('date')->nullable();
-            $table->time('start_time');
+            $table->time('start_time')->nullable();
             $table->time('finish_time')->nullable();
             
             $table->timestamps();

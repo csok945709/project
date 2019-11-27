@@ -27,7 +27,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav" style="margin-left:30%">
-                <a class="nav-item nav-link active" href="{{ route('consultant.manageAppointmentTime') }}" style="font-weight:600;font-size:16px" >Manage Appointment Time <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="{{ route('consultant.manageAppointmentTime', [Auth::user()->id]) }}" style="font-weight:600;font-size:16px" >Manage Appointment Time <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">Appointment Calender</a>              
               </div>
             </div>

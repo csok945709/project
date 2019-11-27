@@ -90,4 +90,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reward::class, 'reward_by', 'id');
     }
+    
+    public function workingHours()
+    {
+        return $this->hasMany(WorkingHour::class, 'consultant_id', 'id');
+    }
 }

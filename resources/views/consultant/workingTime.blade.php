@@ -11,7 +11,7 @@
                     <h1>Manage Appointment Time</h1> 
                </div>
                <div class="d-flex" style="float: right;">
-                    <a href="#" class="btn btn-primary mr-2">Manage Appointment Time</a>
+                    <a href="{{ route('consultant.addAppointmentTime', [Auth::user()->id]) }}" class="btn btn-primary mr-2">Manage Appointment Time</a>
                     <a href="#" class="btn btn-success">View Appointment Schedule</a>
                </div>
                <div id='calendar' class="mt-5"></div>
@@ -32,7 +32,14 @@
                 // put your options and callbacks here
                 defaultView: 'agendaWeek',
                 events : [
-                    
+                    @foreach($working_hours as $hour)
+                    {
+                        title : '{{ $user->name}}',
+                        start : '{{ $hour->date . ' ' . $hour->start_time }}',
+                        end : '{{ $hour->date . ' ' . $hour->finish_time }}',
+                        url : ''
+                    },
+                    @endforeach 
                 ]
             })
         });

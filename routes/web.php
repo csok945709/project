@@ -132,7 +132,9 @@ Route::post('/c/apply/store', 'OrganizerApplyController@store')->name('organizer
 Route::get('/consultant/apply', 'ConsultantApplyController@applyForm')->name('consultant.apply');
 Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name('consultant.store');
 //Consultant
-Route::get('/consultant/manageAppointmentTime', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
+Route::post('/consultant/addAppointmentTime/store', 'ConsultantAppointmentController@storeAppointmentTime')->name('consultant.storeAppointmentTime');
+Route::get('/consultant/addAppointmentTime/{user}', 'ConsultantAppointmentController@addAppointmentTime')->name('consultant.addAppointmentTime');
+Route::get('/consultant/manageAppointmentTime/{user}', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
 
