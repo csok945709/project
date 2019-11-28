@@ -135,6 +135,8 @@ Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name(
 Route::post('/consultant/addAppointmentTime/store', 'ConsultantAppointmentController@storeAppointmentTime')->name('consultant.storeAppointmentTime');
 Route::get('/consultant/addAppointmentTime/{user}', 'ConsultantAppointmentController@addAppointmentTime')->name('consultant.addAppointmentTime');
 Route::get('/consultant/manageAppointmentTime/{user}', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
+Route::get('/consultant/viewAppointmentTime/{user}', 'ConsultantAppointmentController@viewAppointmentTime')->name('consultant.viewAppointmentTime');
+Route::get('/consultant/bookingAppointment/{user}', 'ConsultantAppointmentController@bookingAppointment')->name('consultant.bookingAppointment');
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
 

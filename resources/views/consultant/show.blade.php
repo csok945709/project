@@ -32,7 +32,7 @@
                 <div class="card-body">
                 <h3 style="font-weight:600;text-align:center">Online Chating</h3><hr>
                     <a href="{{ route('chat', [$consultant->profile->user_id ])}}" class="btn btn-primary mb-2 ml-2" style="width:90%;">Online Chating</a>
-                    <a href="#" class="btn btn-danger ml-2" style="width:90%;">Booking</a>
+                    <a href="{{ route('consultant.viewAppointmentTime', [$consultant->id]) }}" class="btn btn-danger ml-2" style="width:90%;">View Appointment Time</a>
                 </div>
            </div>
         
