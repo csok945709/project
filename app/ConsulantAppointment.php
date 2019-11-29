@@ -9,6 +9,11 @@ use App\User;
 class ConsulantAppointment extends Model
 {
 
-    protected $fillable = ['start_time', 'finish_time', 'comments', 'user_id', 'consultant_id'];
+    protected $fillable = ['date','start_time', 'finish_time', 'comments', 'user_id', 'consultant_id', 'status'];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -71,6 +71,7 @@ Route::get('/profile/course/{user}', 'ProfilesController@indexCourse')->name('pr
 Route::get('/profile/course/viewApply/{user}', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
 Route::get('/profile/course/viewOrgCourse/{user}', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
 Route::get('/profile/consultant/consultantTime/{user}', 'ProfilesController@consultantTime')->name('profile.consultantTime');
+Route::get('/profile/consultant/bookAppointmentTime/{user}', 'ProfilesController@bookAppointmentTime')->name('profile.bookAppointmentTime');
 Route::get('/profile/question/{user}', 'ProfilesController@indexQuestion')->name('profile.indexQuestion');
 Route::get('/profile/document/{user}', 'ProfilesController@indexDocument')->name('profile.indexDocument');
 Route::get('/profile/forum/{user}', 'ProfilesController@indexForum')->name('profile.indexForum');
@@ -134,9 +135,14 @@ Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name(
 //Consultant
 Route::post('/consultant/addAppointmentTime/store', 'ConsultantAppointmentController@storeAppointmentTime')->name('consultant.storeAppointmentTime');
 Route::get('/consultant/addAppointmentTime/{user}', 'ConsultantAppointmentController@addAppointmentTime')->name('consultant.addAppointmentTime');
+Route::get('/consultant/editAppointmentTime/edit/{user}', 'ConsultantAppointmentController@editAppointmentTime')->name('consultant.editAppointmentTime');
+Route::get('/consultant/cancelAppointmentTime/cancel/{user}', 'ConsultantAppointmentController@cancelAppointmentTime')->name('consultant.cancelAppointmentTime');
+Route::patch('/consultant/updateAppointmentTime/update/{user}', 'ConsultantAppointmentController@updateAppointmentTime')->name('consultant.updateAppointmentTime');
 Route::get('/consultant/manageAppointmentTime/{user}', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
 Route::get('/consultant/viewAppointmentTime/{user}', 'ConsultantAppointmentController@viewAppointmentTime')->name('consultant.viewAppointmentTime');
 Route::get('/consultant/bookingAppointment/{user}', 'ConsultantAppointmentController@bookingAppointment')->name('consultant.bookingAppointment');
+Route::post('/consultant/bookingAppointment/store', 'ConsultantAppointmentController@storeBookingAppointment')->name('consultant.storeBookingAppointment');
+
 Route::get('/consultant', 'ConsultantController@index')->name('consultant.index');
 Route::get('/consultant/{user}', 'ConsultantController@show')->name('consultant.show');
 

@@ -8,11 +8,11 @@
         
         <div class="col-12">
                <div style="text-align:center">
-                    <h1>Manage Appointment Time</h1> 
+                    <h1>{{ $user->username }} Appointment Time</h1> 
                </div>
                <div class="d-flex" style="float: right;">
                     <a href="{{ route('consultant.addAppointmentTime', [Auth::user()->id]) }}" class="btn btn-primary mr-2">Manage Appointment Time</a>
-                    <a href="#" class="btn btn-success">View Appointment Schedule</a>
+               <a href="{{ route('profile.consultantTime', Auth::user()->id) }}" class="btn btn-success">View Appointment Details</a>
                </div>
                <div id='calendar' class="mt-5"></div>
                 
@@ -38,6 +38,15 @@
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}',
                         url : ''
+                    },@endforeach 
+                    @foreach($appointmentDetails as $hour)
+                    {
+                        title : '{{ DB::table('users')->where('id', $hour->user_id)->get('username')->pluck('username')->first() }}' + '  Make a appointment',
+                        start : '{{ $hour->date . ' ' . $hour->start_time }}',
+                        end : '{{ $hour->date . ' ' . $hour->finish_time }}',
+                        url : '{{ route('consultant.editAppointmentTime', $user->id) }}',
+                        color: '#444444',
+
                     },
                     @endforeach 
                 ]

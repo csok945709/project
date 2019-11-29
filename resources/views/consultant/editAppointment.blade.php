@@ -4,12 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-            <form action="/consultant/bookingAppointment/store" enctype="multipart/form-data" method="POST">
+            <form action="/consultant/updateAppointmentTime/update/{$user->id}" enctype="multipart/form-data" method="POST">
             @csrf
+            @method('PATCH')
                 <div class="row">
-                    <h1>Booking Appointment</h1>
+                    <h1>Edit Appointment</h1>
                 </div>
-            <input type="hidden" value="{{ $consultant->id }}" name="consultant_id">
+            <input type="hidden" value="{{ $user->id }}" name="consultant_id">
                 <div class="form-group row">
                     <label for="name" class="col-md-4 col-form-label">User Name</label>                 
                         <input id="name" 
@@ -25,15 +26,15 @@
                         @enderror
                 </div>
                 <div class="form-group row">
-                    <label for="bookdate" class="col-md-4 col-form-label">Date</label>                 
-                        <input id="bookdate" 
+                    <label for="date" class="col-md-4 col-form-label">Date</label>                 
+                        <input id="date" 
                                type="date" 
-                               class="form-control @error('bookdate') is-invalid @enderror" 
-                               value="{{ old('bookdate') }}" 
-                               name="bookdate" 
+                               class="form-control @error('date') is-invalid @enderror" 
+                               value="{{ old('date')  ?? $appointmentDetails->date }}" 
+                               name="date" 
                                 min="{{ $Currentdate }}"
-                                autocomplete="bookdate" autofocus>
-                        @error('bookdate')
+                                autocomplete="date" autofocus>
+                        @error('date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -44,7 +45,7 @@
                             <input id="stime" 
                                    type="time" 
                                    class="form-control @error('stime') is-invalid @enderror" 
-                                   value="{{ old('stime') }}" 
+                                   value="{{ old('stime') ?? $appointmentDetails->start_time }}" 
                                    name="stime" 
                                     autocomplete="stime" autofocus>
                             @error('stime')
@@ -59,7 +60,7 @@
                         <input id="ftime" 
                                type="time" 
                                class="form-control @error('ftime') is-invalid @enderror" 
-                               value="{{ old('ftime') }}" 
+                               value="{{ old('ftime') ?? $appointmentDetails->finish_time }}" 
                                name="ftime" 
                                 autocomplete="ftime" autofocus>
                         @error('ftime')
@@ -74,10 +75,10 @@
                         <textarea id="comments" 
                                type="text" 
                                class="form-control @error('comments') is-invalid @enderror" 
-                               value="{{ old('comments') }}" 
+                               value="{{ old('comments') ?? $appointmentDetails->comments }}" 
                                name="comments" 
                                placeholder="Leave comments here..."
-                               autocomplete="comments" autofocus></textarea>
+                autocomplete="comments" autofocus>{{  $appointmentDetails->comments }}</textarea>
                         @error('comments')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -86,7 +87,8 @@
                 </div>
 
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Booking Appointment</button>
+                    <button class="btn btn-primary mr-2">Update Appointment</button>
+                    <a href="{{ route('consultant.cancelAppointmentTime', $user->id) }}" class="btn btn-danger">Cancel Appointment</a>
                 </div>
             </form>
         </div>

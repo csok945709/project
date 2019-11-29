@@ -10,7 +10,7 @@
 
     
 <div class="col-12">
-    <h3 style="text-align:center;font-weight:700">Manage Appointment Time</h3>
+    <h3 style="text-align:center;font-weight:700">Booking Appointment Schedule</h3>
     <a href="{{ route('profile.consultantTime',[$user->id]) }}"  class="btn btn-success mb-3" style="width:19%">Consultant</a>
 
     <a  href="{{ route('profile.viewApply', [$user->id]) }}"  id="courseHover" class="btn btn-primary mb-3" style="width:19%">My Course</a>
@@ -28,8 +28,8 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav" style="margin-left:20%">
                 <a class="nav-item nav-link" href="{{ route('consultant.manageAppointmentTime', [Auth::user()->id]) }}" style="font-weight:600;font-size:16px" >Manage Appointment Time</a>
-                <a class="nav-item nav-link active" href="{{route('profile.consultantTime', $user->id)}}" style="font-weight:600;font-size:16px;">Appointment Schedule</a>    
-                <a class="nav-item nav-link" href="{{route('profile.bookAppointmentTime', $user->id)}}" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">Booked Appointment</a>              
+                <a class="nav-item nav-link" href="{{route('profile.consultantTime', $user->id)}}" style="font-weight:600;font-size:16px;">Appointment Schedule</a>    
+                <a class="nav-item nav-link active" href="#" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">Booked Appointment</a>              
               </div>
             </div>
           </nav>
@@ -42,7 +42,7 @@
       <thead>
           <tr>
               <th>No.</th>
-              <th>User</th>
+              <th>Consultant</th>
               <th>Date</th>
               <th>Start From</th>
               <th>Finish At</th>
@@ -55,7 +55,7 @@
           @foreach ($appointentDetails as $appointentDetail)
           <tr>
               <td>#</td>
-              <td>{{ DB::table('users')->where('id', $appointentDetail->user_id)->get('username')->pluck('username')->first() }}</td>
+              <td>{{ DB::table('users')->where('id', $appointentDetail->consultant_id)->get('username')->pluck('username')->first() }}</td>
               <td>{{ $appointentDetail->date }}</td>
               <td>{{ $appointentDetail->start_time }}</td>
               <td>{{ $appointentDetail->finish_time }}</td>
@@ -66,7 +66,8 @@
                   Cancel
               @endif</td>
               <td>
-                <a href="" class="btn btn-primary">View More</a>               
+                <a href="" class="btn btn-primary">Edit Appointment</a>  
+                <a href="" class="btn btn-primary">Cancel Appointment</a>               
               </td>
           </tr>
           @endforeach

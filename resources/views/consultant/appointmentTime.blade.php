@@ -11,7 +11,7 @@
                     <h1>{{ $user->username }} Appointment Time</h1> 
                </div>
                <div class="d-flex" style="float: right;">
-                    <a href="{{ route('consultant.bookingAppointment', [Auth::user()->id]) }}" class="btn btn-primary mr-2">Book Appointment</a>
+                    <a href="{{ route('consultant.bookingAppointment', [$user->id]) }}" class="btn btn-primary mr-2">Book Appointment</a>
                </div>
                <div id='calendar' class="mt-5"></div>
                 
@@ -33,12 +33,24 @@
                 events : [
                     @foreach($working_hours as $hour)
                     {
-                        title : '{{ $user->name}}',
+                        
+                        title : '{{ $user->name}}' + ' Appointment Hour',
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}',
-                        url : ''
+                        url : '{{ route('consultant.editAppointmentTime', $user->id) }}'
+
+                    },@endforeach 
+                    @foreach($appointmentDetails as $hour)
+                    {
+                        title : '{{  DB::table('users')->where('id', $hour->user_id)->get('username')->pluck('username')->first() }}' + '  Make a appointment',
+                        start : '{{ $hour->date . ' ' . $hour->start_time }}',
+                        end : '{{ $hour->date . ' ' . $hour->finish_time }}',
+                        url : '{{ route('consultant.editAppointmentTime', $user->id) }}',
+                        color: '#444444',
+
                     },
                     @endforeach 
+                  
                 ]
             })
         });

@@ -10,6 +10,8 @@ use App\Document;
 use DB;
 use App\Course;
 use App\Question;
+use App\ConsulantAppointment;
+use App\WorkingHour;
 
 class ProfilesController extends Controller
 {
@@ -24,7 +26,16 @@ class ProfilesController extends Controller
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $user = User::findOrFail($user)->first();
-        return view('profiles.consultantTime',compact('user', 'follows'));
+        $appointentDetails = ConsulantAppointment::where('consultant_id', $user->id)->get();
+        return view('profiles.consultantTime',compact('user', 'follows', 'appointentDetails'));
+    }
+
+    public function bookAppointmentTime(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $user = User::findOrFail($user)->first();
+        $appointentDetails = ConsulantAppointment::where('user_id', $user->id)->get();
+        return view('profiles.bookingAppointmentTime',compact('user', 'follows', 'appointentDetails'));
     }
 
     public function indexDocument(User $user)

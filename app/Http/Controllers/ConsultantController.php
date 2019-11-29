@@ -32,10 +32,12 @@ class ConsultantController  extends Controller
     {
         $OrgForm = OrganizerApply::all();
         $courseCategory = Course_Category::all();
-        $profiles = Profile::get();
         $userID = Auth::user()->id;
         $consultant_applies  = ConsultantApply::where('user_id', $userID)->get();
-        return view('consultant/index', compact('profiles', 'courseCategory','OrgForm','consultant_applies'));
+        $consulantID = User::where('consultant', true)->get();
+        $profiles = Profile::get();
+        $users = User::all();
+        return view('consultant/index', compact('profiles', 'courseCategory','OrgForm','consultant_applies', 'consulantID', 'users'));
     }
 
     public function show(User $user)

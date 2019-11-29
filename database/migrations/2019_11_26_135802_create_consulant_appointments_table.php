@@ -17,9 +17,11 @@ class CreateConsulantAppointmentsTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('consultant_id');
-            $table->datetime('start_time')->nullable();
-            $table->datetime('finish_time')->nullable();
+            $table->date('date')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('finish_time')->nullable();
             $table->text('comments')->nullable();
+            $table->boolean('status')->default('0');
             
             $table->timestamps();
         });
