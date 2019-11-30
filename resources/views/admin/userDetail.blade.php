@@ -1,7 +1,7 @@
 @extends('layouts.adminApp')
 
 @section('content')
-<div class="row container col-12">
+<div class="row">
 @include('admin/sidebar')
     <div class="col-8">
         <h1 style="text-align:center">User Details</h1>
@@ -20,7 +20,7 @@
                     
                 
                 <tr>
-                    <td>1</td>
+                    <td></td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->username }}</td>
@@ -38,9 +38,21 @@
 @section('javascript')
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
-    
     $(document).ready(function() {
-        $('#UserData').DataTable();
+    var t = $('#UserData').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
     } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
     </script>
 @stop

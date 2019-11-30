@@ -29,7 +29,7 @@
               <div class="navbar-nav" style="margin-left:20%">
                 <a class="nav-item nav-link" href="{{ route('consultant.manageAppointmentTime', [Auth::user()->id]) }}" style="font-weight:600;font-size:16px" >Manage Appointment Time</a>
                 <a class="nav-item nav-link" href="{{route('profile.consultantTime', $user->id)}}" style="font-weight:600;font-size:16px;">Appointment Schedule</a>    
-                <a class="nav-item nav-link active" href="#" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">Booked Appointment</a>              
+                <a class="nav-item nav-link active" href="{{ route('profile.bookAppointmentTime', Auth::user()->id )}}" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">Booked Appointment</a>              
               </div>
             </div>
           </nav>
@@ -54,7 +54,7 @@
       <tbody> 
           @foreach ($appointentDetails as $appointentDetail)
           <tr>
-              <td>#</td>
+              <td></td>
               <td>{{ DB::table('users')->where('id', $appointentDetail->consultant_id)->get('username')->pluck('username')->first() }}</td>
               <td>{{ $appointentDetail->date }}</td>
               <td>{{ $appointentDetail->start_time }}</td>
@@ -81,11 +81,23 @@
 
 @endsection
 @section('javascript')
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript">
-        
-        $(document).ready(function() {
-            $('#UserData').DataTable();
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    var t = $('#UserData').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
         } );
-        </script>
-    @stop
+    } ).draw();
+} );
+    </script>
+@stop

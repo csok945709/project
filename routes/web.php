@@ -22,15 +22,15 @@ Auth::routes();
 
 //Admin
 Route::prefix('admin')->group(function() {
+    Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/', 'AdminController@index')->name('admin.index');
     Route::get('/userDetail', 'AdminController@userDetail')->name('admin.userDetail');
     Route::get('/consultantDetail', 'AdminController@consultantDetail')->name('admin.consultantDetail');
     Route::get('/organizerDetail', 'AdminController@organizerDetail')->name('admin.organizerDetail');
-    Route::get('/approveOrganizer', 'AdminController@approveOrgIndex')->name('admin.approveOrgIndex');
-    Route::get('/approveOrganizer/show/{orgApply}', 'AdminController@show')->name('admin.showOrg');
+    Route::get('/organizerRequest', 'AdminController@organizerRequest')->name('admin.organizerRequest');
+    Route::get('/approveOrganizer/show/{orgApply}', 'AdminController@showOrg')->name('admin.showOrg');
     Route::get('/approveOrganizer/{orgApply}', 'AdminController@approveOrganizer')->name('admin.approveOrganizer');
     
 });
@@ -69,6 +69,7 @@ Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 //profile
 Route::get('/profile/course/{user}', 'ProfilesController@indexCourse')->name('profile.indexCourse');
 Route::get('/profile/course/viewApply/{user}', 'ProfilesController@manageCourseApply')->name('profile.viewApply');
+Route::get('/profile/course/viewApplicant/{user}', 'ProfilesController@viewApplicant')->name('profile.viewApplicant');
 Route::get('/profile/course/viewOrgCourse/{user}', 'ProfilesController@manageCourseOraganized')->name('profile.viewOrgCourse');
 Route::get('/profile/consultant/consultantTime/{user}', 'ProfilesController@consultantTime')->name('profile.consultantTime');
 Route::get('/profile/consultant/bookAppointmentTime/{user}', 'ProfilesController@bookAppointmentTime')->name('profile.bookAppointmentTime');
@@ -107,6 +108,7 @@ Route::get('/onlinecourses/shop', 'OnlineCourseController@shop')->name('course.s
 Route::get('/courseCat', 'OnlineCourseController@courseCat')->name('course.courseCat');
 Route::get('/c/create', 'OnlineCourseController@create')->name('course.create');
 Route::get('/c/{user}/{course}/register', 'OnlineCourseController@courseRegister')->name('course.register');
+Route::get('/c/cancelRegister/{user}/{course}', 'OnlineCourseController@cancelRegister')->name('course.cancelRegister');
 Route::get('/c/{user}/{course}/detail', 'OnlineCourseController@detail')->name('course.detail');
 Route::get('/c/{user}/{course}', 'OnlineCourseController@show')->name('course.show');
 Route::post('/c', 'OnlineCourseController@store')->name('course.store');
@@ -135,10 +137,12 @@ Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name(
 //Consultant
 Route::post('/consultant/addAppointmentTime/store', 'ConsultantAppointmentController@storeAppointmentTime')->name('consultant.storeAppointmentTime');
 Route::get('/consultant/addAppointmentTime/{user}', 'ConsultantAppointmentController@addAppointmentTime')->name('consultant.addAppointmentTime');
-Route::get('/consultant/editAppointmentTime/edit/{user}', 'ConsultantAppointmentController@editAppointmentTime')->name('consultant.editAppointmentTime');
-Route::get('/consultant/cancelAppointmentTime/cancel/{user}', 'ConsultantAppointmentController@cancelAppointmentTime')->name('consultant.cancelAppointmentTime');
+Route::get('/consultant/editAppointmentTime/edit/{user}/{appointment}', 'ConsultantAppointmentController@editAppointmentTime')->name('consultant.editAppointmentTime');
+Route::get('/consultant/cancelAppointmentTime/cancel/{user}/{appointment}', 'ConsultantAppointmentController@cancelAppointmentTime')->name('consultant.cancelAppointmentTime');
 Route::patch('/consultant/updateAppointmentTime/update/{user}', 'ConsultantAppointmentController@updateAppointmentTime')->name('consultant.updateAppointmentTime');
 Route::get('/consultant/manageAppointmentTime/{user}', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
+Route::get('/consultant/editWorkingHour/{user}', 'ConsultantAppointmentController@editWorkingHour')->name('consultant.editWorkingHour');
+Route::patch('/consultant/updateWorkingHour/update/{user}', 'ConsultantAppointmentController@updateWorkingHour')->name('consultant.updateWorkingHour');
 Route::get('/consultant/viewAppointmentTime/{user}', 'ConsultantAppointmentController@viewAppointmentTime')->name('consultant.viewAppointmentTime');
 Route::get('/consultant/bookingAppointment/{user}', 'ConsultantAppointmentController@bookingAppointment')->name('consultant.bookingAppointment');
 Route::post('/consultant/bookingAppointment/store', 'ConsultantAppointmentController@storeBookingAppointment')->name('consultant.storeBookingAppointment');

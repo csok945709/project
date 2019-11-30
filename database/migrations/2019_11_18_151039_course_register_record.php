@@ -15,6 +15,7 @@ class CourseRegisterRecord extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('status')->default('0');
             $table->timestamps();
         });
     }

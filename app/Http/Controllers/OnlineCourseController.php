@@ -108,7 +108,7 @@ class OnlineCourseController extends Controller
         $courseRating = Course::where('id', $course->id)->first();
         $ratingCount = Rating::where('rateable_type', 'App\Course')->where('rateable_id', $course->id)->count();
         $ratingAve = number_format($courseRating->userAverageRating, 2);
-        $courseRegCheck = DB::table('courseregister')->where('user_id', $user)->where('course_id', $course->id)->first();
+        $courseRegCheck = DB::table('courseregister')->where('user_id', $user)->where('course_id', $course->id)->where('status', true)->first();
         if(empty($courseRegCheck)) {
             $courseRegCheck = 0;
         }
@@ -156,7 +156,7 @@ class OnlineCourseController extends Controller
             $data,
             $imageArray ?? []
         ));
-        return redirect()->route('course.show', [$user,$course]);
+        return redirect()->route('course.detail', [$user,$course]);
     }
 
     public function courseStar (Request $request, Course $course) {
@@ -176,6 +176,18 @@ class OnlineCourseController extends Controller
                     'user_id' => $user->id,
                     "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
                     "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
+                    "status" => true,
+                ]);
+        
+        return redirect()->route('course.detail', [$user->id,$course->id]);
+    }
+
+    public function cancelRegister (User $user, Course $course) {
+        $course = Course::where('id', $course->id)->first();
+        DB::table('courseregister')
+                ->update([
+                    "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
+                    "status" => false,
                 ]);
         
         return redirect()->route('course.detail', [$user->id,$course->id]);

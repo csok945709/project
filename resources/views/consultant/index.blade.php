@@ -28,9 +28,9 @@
                                 @endforeach
                             @endif     
                         @else
-                            <a href="#" class="btn btn-success mr-3"  style="width:20%;">Success</a>                  
+                            <a href="{{ route('consultant.show', Auth::user()->id) }}" class="btn btn-success mr-3"  style="width:20%;">Manage Consultant Profile</a>   
                         @endif
-                            <a href="#" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</a>
+                    <a href="{{ route('profile.bookAppointmentTime', Auth::user()->id )}}" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</a>
                     </div>
                  
                     

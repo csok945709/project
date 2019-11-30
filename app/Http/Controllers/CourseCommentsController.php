@@ -39,7 +39,7 @@ class CourseCommentsController extends Controller
             ]);
             $course = $course->id;
             $user = auth()->user()->id;
-            return redirect()->route('course.show', compact('course','user'))->with('success','Comment Added successfully..!');
+            return redirect()->route('course.detail', compact('course','user'))->with('success','Comment Added successfully..!');
         }else{
             return back()->withInput()->with('error','Something wrong');
         }

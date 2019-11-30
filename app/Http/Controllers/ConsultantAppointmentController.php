@@ -29,6 +29,30 @@ class ConsultantAppointmentController extends Controller
         $working_hours = WorkingHour::where('consultant_id', $user->id)->get();
         return view('consultant/workingTime', compact('user','working_hours', 'appointmentDetails') );
     }
+
+    public function editWorkingHour(User $user)
+    {
+        $working_hours = WorkingHour::where('consultant_id', $user->id)->first();
+        return view('consultant/editWorkingHour', compact('user','working_hours') );
+    }
+
+    public function updateWorkingHour()
+    {
+        $data = request()->validate([
+            'consultant_id' => 'required',
+            'date' => 'required',
+            'stime' => 'required',
+            'ftime' => 'required',
+        ]);
+        auth()->user()->workingHours()->update([
+            'consultant_id' => $data['consultant_id'],
+            'date' => $data['date'],
+            'start_time' => date("H:i:s", strtotime($data['stime'])),
+            'finish_time' => date("H:i:s", strtotime($data['ftime']))
+        ]);
+        $user = Auth::user()->id;
+        return redirect()->route('consultant.manageAppointmentTime', [$user]);
+    }
     
     public function addAppointmentTime(User $user)
     {
@@ -56,14 +80,14 @@ class ConsultantAppointmentController extends Controller
     
     public function viewAppointmentTime(User $user)
     {
-        $appointmentDetails = ConsulantAppointment::where('consultant_id', $user->id)->get();
+        $appointmentDetails = ConsulantAppointment::where('consultant_id', $user->id)->where('status', '1')->get();
         $working_hours = WorkingHour::where('consultant_id', $user->id)->get();
         return view('consultant/appointmentTime', compact('user','working_hours','appointmentDetails'));
     }
 
-    public function editAppointmentTime(User $user)
+    public function editAppointmentTime(User $user, ConsulantAppointment $appointment)
     {
-        $appointmentDetails = ConsulantAppointment::where('consultant_id', $user->id)->where('user_id', Auth::user()->id)->first();
+        $appointmentDetails = ConsulantAppointment::where('consultant_id', $user->id)->where('user_id', Auth::user()->id)->where('id', $appointment->id)->first();
         $working_hours = WorkingHour::where('consultant_id', $user->id)->first();
         $Currentdate =  Carbon::now()->format('Y-m-d');
         return view('consultant/editAppointment', compact('user','working_hours','appointmentDetails','Currentdate'));
@@ -114,12 +138,14 @@ class ConsultantAppointmentController extends Controller
             'finish_time' => date("H:i:s", strtotime($data['ftime'])),
             'comments' => Input::get('comments')
         ]);
-        $user = Auth::user()->id;
-        return redirect()->route('consultant.viewAppointmentTime', [$user]);
+        $consultant = Input::get('consultant_id');
+        return redirect()->route('consultant.viewAppointmentTime', [$consultant]);
     }
-    public function cancelAppointmentTime(User $user)
+    public function cancelAppointmentTime(User $user, ConsulantAppointment $appointment)
     {
-        auth()->user()->bookAppointment()->delete();
+        ConsulantAppointment::where('id', $appointment->id)->update([
+            'status' => '0',
+        ]);
         return redirect()->route('consultant.viewAppointmentTime', [$user]);
     }
 }

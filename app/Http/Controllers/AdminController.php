@@ -26,8 +26,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $applyData = OrganizerApply::get();
-        return view('admin.index', compact('applyData'));
+        return view('admin.index');
     }
     
     public function userDetail()
@@ -48,27 +47,19 @@ class AdminController extends Controller
         return view('admin.consultantDetail', compact('users'));
     }
     
-    public function approveOrgIndex()
-    {
-        $applyData = OrganizerApply::get();
-        return view('admin.organizerApprove', compact('applyData'));
-    }
-
     public function approveOrganizer(User $orgApply)
     {
-        $orgApplyId = $orgApply->id;
-        $orgApply = OrganizerApply::where('user_id', $orgApplyId)->first();
-        $orgApply->status = 1;
-        $orgApply->save();  
-
-        $userOrg = User::where('id', $orgApplyId)->first();
-        $userOrg->organizer = 1;
-        $userOrg->save();  
-        $applyData = OrganizerApply::all();
-        return view('admin.organizerApprove', compact('orgApplyId', 'applyData'));
+        dd('approve');
+        return view('admin.organizerRequest', compact('applyData'));
     }
 
-    public function show(User $orgApply)
+    public function organizerRequest()
+    {
+        $applyData = OrganizerApply::get();
+        return view('admin.organizerRequest', compact('applyData'));
+    }
+
+    public function showOrg(User $orgApply)
     {
         $orgApplyId = $orgApply->id;
         $orgApply = OrganizerApply::where('user_id', $orgApplyId)->first();

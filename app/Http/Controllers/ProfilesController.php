@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\CourseInvoice;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Document;
 use DB;
@@ -18,14 +19,12 @@ class ProfilesController extends Controller
     public function index(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         return view('profiles.blogIndex',compact('user', 'follows'));
     }
 
     public function consultantTime(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $appointentDetails = ConsulantAppointment::where('consultant_id', $user->id)->get();
         return view('profiles.consultantTime',compact('user', 'follows', 'appointentDetails'));
     }
@@ -33,15 +32,13 @@ class ProfilesController extends Controller
     public function bookAppointmentTime(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
-        $appointentDetails = ConsulantAppointment::where('user_id', $user->id)->get();
+        $appointentDetails = ConsulantAppointment::where('user_id', Auth::user()->id)->get();
         return view('profiles.bookingAppointmentTime',compact('user', 'follows', 'appointentDetails'));
     }
 
     public function indexDocument(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $documents = Document::where('user_id', $user)->latest()->paginate(5);
         return view('profiles.documentIndex',compact('user','documents','follows'));
     }
@@ -49,7 +46,6 @@ class ProfilesController extends Controller
     public function indexQuestion(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $questions = Question::where('user_id', $user)->latest()->paginate(5);
         return view('profiles.questionIndex',compact('user','questions','follows'));
     }
@@ -57,7 +53,6 @@ class ProfilesController extends Controller
     public function indexCourse(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $courses = Document::where('user_id', $user)->latest()->paginate(5);
         return view('profiles.courseIndex',compact('user','courses','follows'));
     }
@@ -65,17 +60,26 @@ class ProfilesController extends Controller
     public function manageCourseApply(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $applyData = CourseInvoice::all();
         $courseRegId = DB::table('courseregister')->where('user_id', $user->id)->pluck('course_id')->toArray();
         $courseRegData = Course::whereIn('id', $courseRegId)->get();
         return view('profiles.course.viewApply',compact('user','follows','applyData','courseRegData'));
     }
+
+    public function viewApplicant(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $applicantDetails = DB::table('courses')
+        ->join('courseregister', 'courseregister.course_id', '=', 'courses.id')
+        ->join('users', 'users.id', '=', 'courseregister.user_id')
+        ->where('courses.user_id', '=', $user->id)
+        ->get();
+        return view('profiles.course.viewApplicant',compact('user','follows','applicantDetails'));
+    }
     
     public function manageCourseOraganized(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        $user = User::findOrFail($user)->first();
         $courses = Course::where('user_id', $user->id)->latest()->paginate(5);
         return view('profiles.course.viewOrgCourse',compact('user','courses','follows'));
     }

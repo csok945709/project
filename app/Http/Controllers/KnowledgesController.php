@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 
 
 use App\User;
@@ -54,7 +55,6 @@ class KnowledgesController extends Controller
             'document' => ['required', 'mimes:doc,pdf,docx,zip,ppt,pptx'],
         ]);
         $documentPath = request('document')->store('document','public');
-        $documentFile = Document::make(public_path("/storage/{$documentPath}"));
         $price = request('price', 0);
         
         auth()->user()->documents()->create([
@@ -64,7 +64,7 @@ class KnowledgesController extends Controller
             'price' => $price,
         ]);
         
-        return redirect('/profile/' . auth()->user()->id . '/document');
+        return redirect()->route('profile.indexDocument', [Auth::user()->id]);
     }
 
 

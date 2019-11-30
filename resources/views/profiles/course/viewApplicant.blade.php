@@ -24,10 +24,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav" style="margin-left:30%">
-                <a class="nav-item nav-link active" href="{{ route('profile.viewApply', [$user->id]) }}" style="font-weight:600;font-size:16px" >View Register Course <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ route('profile.viewOrgCourse', [$user->id]) }}" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">View Organized Course</a>
-                <a class="nav-item nav-link" href="{{ route('profile.viewApplicant', [$user->id]) }}"  style="font-weight:600;font-size:16px">View Course Applicant</a> 
-              </div>
+                <a class="nav-item nav-link" href="{{ route('profile.viewApply', [$user->id]) }}" style="font-weight:600;font-size:16px" >View Register Course <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ route('profile.viewOrgCourse', [$user->id]) }}" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">View Organized Course</a> 
+                <a class="nav-item nav-link active" href="{{ route('profile.viewApplicant', [$user->id]) }}" style="font-weight:600;font-size:16px">View Course Applicant</a> 
+
+            </div>
             </div>
           </nav>
 
@@ -39,44 +40,43 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Venue</th>
-                    <th>Language</th>
-                    <th>Time</th>
+                    <th>Name</th>
+                    <th>Course Title</th>
+                    <th>venue</th>
                     <th>Date</th>
+                    <th>Time</th>
                     <th>Price (RM)</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($courseRegData as $courseData)
                     
+              
+                @foreach ($applicantDetails as $applicantDetail)
+                        <tr>
+                            <td></td>
+                            <td>{{ $applicantDetail->username }}</td>
+                            <td>{{ $applicantDetail->title }}</td>   
+                            <td>{{ $applicantDetail->venue }}</td>        
+                            <td>{{ $applicantDetail->date }}</td>
+                            <td>{{ $applicantDetail->time }}</td>
+                            <td>{{ $applicantDetail->price }}</td>
+                            <td>@if ($applicantDetail->status == true)
+                                Paid
+                            @else
+                                Cancel
+                            @endif</td>
+                            <td class="d-flex">
+                            <a href="{{ route('course.detail', [Auth::user()->id, $applicantDetail->id]) }}" class="btn btn-primary">View More</a>   
+                            @if ($applicantDetail->status == true)
+                                <a href="{{ route('course.cancelRegister', [Auth::user()->id, $applicantDetail->id]) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>            
+                            @else
+                                <a href="#" class="btn btn-success ml-2" readonly>Cancel Successfull</a>            
+                            @endif
+                        </td>
+                        </tr>
                 
-                <tr>
-                    <td></td>
-                    <td>{{ $courseData->title }}</td>
-                    <td>{!! $courseData->description !!}</td>
-                    <td>{{ $courseData->venue }}</td>
-                    <td>{{ $courseData->language }}</td>
-                    <td>{{ $courseData->time }}</td>
-                    <td>{{ $courseData->date }}</td>
-                    <td>{{ $courseData->price }}</td>
-                    <td>@if ($courseData->status == true)
-                        Paid
-                    @else
-                        Cancel
-                    @endif</td>
-                    <td class="d-flex">
-                    <a href="{{ route('course.detail', [Auth::user()->id, $courseData->id]) }}" class="btn btn-primary">View More</a>   
-                    @if ($courseData->status == true)
-                        <a href="{{ route('course.cancelRegister', [Auth::user()->id, $courseData->id]) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>            
-                    @else
-                        <a href="#" class="btn btn-success ml-2" readonly>Cancel Successfull</a>            
-                    @endif
-                </td>
-                </tr>
                 @endforeach
             </tbody>
         </table>

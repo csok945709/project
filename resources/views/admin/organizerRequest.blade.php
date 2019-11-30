@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 style="text-align:center">Organizer Request</h1>
-<div class="row container col-12">
+<div class="row">
 @include('admin/sidebar')
     <div class="col-8">
         <table id="UserData" class="display">
@@ -21,7 +21,7 @@
                     
                 
                 <tr>
-                    <td>1</td>
+                    <td></td>
                     <td>{{ $apply->name }}</td>
                     <td>{{$apply->experience }}</td>
                     <td>{{ $apply->workyears }}</td>
@@ -31,13 +31,13 @@
                         Approved
                     @endif</td>
                     <td>
-                    <a href="{{ route('admin.showOrg', [$apply->user_id]) }}" class="btn btn-primary">View More</a>
+                    <a href="{{ route('admin.organizerDetail', [$apply->user_id]) }}" class="btn btn-info" style="color:white">View More</a>
                             @if ($apply->status == 0)
-                                <a href="{{route('admin.approve', [$apply->user_id] )}}" class="btn btn-primary">Approve</a>
+                                <a href="{{route('admin.approveOrganizer', [$apply->user_id] )}}" class="btn btn-success" onclick="return confirm('Are you sure you want to Approve this request ?')">Approve</a>
                             @else
-                                <a href="{{route('admin.approve', [$apply->user_id] )}}" class="btn btn-success" disable>Approved</a>  
+                                <a href="{{route('admin.approveOrganizer', [$apply->user_id] )}}" class="btn btn-success" disable>Approved</a>  
                             @endif
-                        <a href="#" class="btn btn-danger">Ban User</a>
+                        <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to Ban this user ?')">Ban User</a>
                     </td>
                 </tr>
                 @endforeach
@@ -49,9 +49,21 @@
 @section('javascript')
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
-    
     $(document).ready(function() {
-        $('#UserData').DataTable();
+    var t = $('#UserData').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
     } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
     </script>
 @stop

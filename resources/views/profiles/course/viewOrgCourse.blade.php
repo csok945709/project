@@ -27,7 +27,8 @@
               <div class="navbar-nav" style="margin-left:30%">
                 <a class="nav-item nav-link" href="{{ route('profile.viewApply', [$user->id]) }}" style="font-weight:600;font-size:16px" >View Register Course <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link active" href="{{ route('profile.viewOrgCourse', [$user->id]) }}" style="font-weight:600;font-size:16px;border-left: 1px solid rgb(51, 51, 51);">View Organized Course</a> 
-              </div>
+                <a class="nav-item nav-link" href="{{ route('profile.viewApplicant', [$user->id]) }}"  style="font-weight:600;font-size:16px">View Course Applicant</a> 
+            </div>
             </div>
           </nav>
 
@@ -55,11 +56,23 @@
 </div>
 @endsection
 @section('javascript')
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript">
-        
-        $(document).ready(function() {
-            $('#UserData').DataTable();
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    var t = $('#UserData').DataTable( {
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+ 
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
         } );
-        </script>
-    @stop
+    } ).draw();
+} );
+    </script>
+@stop

@@ -47,7 +47,7 @@
                                                                 <span> {{ $rep->reply }} </span>
                                                             <div style="margin-left:10px;">
                                                             <a rname="{{ Auth::user()->username }}" userId="{{ Auth::user()->id}}"  rid="{{ $comment->id }}" style="cursor: pointer;" class="reply-to-reply" token="{{ csrf_token() }}">Reply</a>&nbsp;<a did="{{ $rep->id }}" class="delete-reply" token="{{ csrf_token() }}" style="cursor: pointer;">Delete</a>
-                                                            {{ $comment->id }}  </div>
+                                                          </div>
                                                             <div class="reply-to-reply-form">
                                                     
                                                                 <!-- Dynamic Reply form -->
@@ -106,14 +106,18 @@
                             <hr>
                              
                         @if ($courseRegCheck !== 0)
-                            @if ($courseRegCheck->course_id == $course->id && $courseRegCheck->user_id == Auth::user()->id) 
+                            @if ($courseRegCheck->course_id == $course->id && $courseRegCheck->user_id == Auth::user()->id && $courseRegCheck->status == true) 
                                 <strong style="font-size:20px;color:green" class="ml-5">Register Success </strong><i class="fa fa-check" style="font-size:30px;color:green"></i>
-                            @else
+                                <hr>
+                                <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
+                                @else
                             <div style="text-align:center;">  
                                 @if ($course->price !== 0)
                                     @if ($courseCount == 1)
-                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id)
+                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id &&  $courseRegCheck->status == true)
                                             <strong>Register Success</strong>
+                                            <hr>
+                                            <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
                                         @endif
                                     @else
                                         <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
@@ -130,8 +134,10 @@
                             <div style="text-align:center;">  
                                 @if ($course->price !== 0)
                                     @if ($courseCount == 1)
-                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id)
+                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id && $courseRegCheck->status == true)
                                             <strong>Register Success</strong>
+                                            <hr>
+                                            <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
                                         @endif
                                     @else
                                         <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>

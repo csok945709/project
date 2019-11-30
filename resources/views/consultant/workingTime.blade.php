@@ -37,14 +37,14 @@
                         title : '{{ $user->name}}',
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}',
-                        url : ''
+                        url : '{{ route('consultant.editWorkingHour', Auth::user()->id) }}'
                     },@endforeach 
                     @foreach($appointmentDetails as $hour)
                     {
                         title : '{{ DB::table('users')->where('id', $hour->user_id)->get('username')->pluck('username')->first() }}' + '  Make a appointment',
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}',
-                        url : '{{ route('consultant.editAppointmentTime', $user->id) }}',
+                        url : '',
                         color: '#444444',
 
                     },
