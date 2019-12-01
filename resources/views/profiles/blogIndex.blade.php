@@ -20,15 +20,26 @@
 </div>
 <div class="row">  
         @foreach ($user->posts as $post)
-            <div class="container card mb-3">
-                <div class="card-body">  
-                <img src="/storage/{{ $post->image }}" style="width:200px;height:125px;float: right;margin-top:20px;">
-                <a href="{{ route('post.show', [$post->user_id, $post->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $post->caption !!}</a>    
-                    <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($post->description,$words = 100, $end = '...') !!}</div>
-                    <a href="{{route('post.edit',[$user->id, $post->id])}}" class="btn btn-success" style="color:white;margin-right:8px;">Edit Post</a>
-                    <a  href="{{ route('post.delete', [ $user->id, $post->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</a>
+            @if ($post->postStatus == true)
+                <div class="container card mb-3">
+                    <div class="card-body">  
+                    <img src="/storage/{{ $post->image }}" style="width:200px;height:125px;float: right;margin-top:20px;">
+                    <a href="{{ route('post.show', [$post->user_id, $post->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $post->caption !!}</a>    
+                        <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($post->description,$words = 100, $end = '...') !!}</div>
+                        <a href="{{route('post.edit',[$user->id, $post->id])}}" class="btn btn-success" style="color:white;margin-right:8px;">Edit Post</a>
+                        <a  href="{{ route('post.delete', [ $user->id, $post->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</a>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="container card mb-3" style="background: #f2f2f2;">
+                    <div class="card-body">  
+                    <img src="/storage/{{ $post->image }}" style="width:200px;height:125px;float: right;margin-top:20px;">
+                    <a href="{{ route('post.show', [$post->user_id, $post->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $post->caption !!}</a>    
+                        <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($post->description,$words = 100, $end = '...') !!}</div>
+                        <strong style="color:red; font-size:20px">*Remark: Your Post has been suspended by the Admin.</strong>
+                    </div>
+                </div>
+            @endif
         @endforeach
     </div>
 </div>

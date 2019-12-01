@@ -10,7 +10,7 @@ use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
 
-
+use App\DocumentReport;
 use App\User;
 use App\Document;
 use App\KnowledgeInvoice;
@@ -37,7 +37,7 @@ class KnowledgesController extends Controller
     public function index()
     {
         // $documents = DB::table('documents')->get();
-        $documents = Document::paginate(5);
+        $documents = Document::where('documentStatus', true)->paginate(5);
         return view('knowledge/index', compact('documents'));
     }
 
@@ -133,4 +133,27 @@ class KnowledgesController extends Controller
         $document->ratings()->save($rating);
         return redirect()->back();
   }
+  
+  public function report(Document $document)
+  {
+     $document = Document::where('id', $document->id)->first();
+     return view('knowledge.report',compact('document'));
+  }
+
+  public function reportStore(Document $document)
+    {
+        $data = request()->validate([
+            'caption' => 'required',
+            'description' => 'required',
+        ]);
+        
+        auth()->user()->docReport()->create([
+            'reportType' => $data['caption'],
+            'reportDescription' =>$data['description'],
+            'document_id' => $document->id,
+            'report_by' => Auth::user()->id,
+        ]);
+        
+        return redirect()->route('profile.reportDocDetails', [Auth::user()->id]);
+    }
 }

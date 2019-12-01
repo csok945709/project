@@ -6,15 +6,19 @@
         <div class="col-7 mr-3">
             <div class="card">
                 <div class="card-body">
-                    <div style="float: right;margin-right:5px;">
+                                
+                    <div style="margin-right:5px;">
                         <strong style="font-size:28px;font-weight:900">{{ $document->caption }}</strong> 
+                    @if ($document->user_id !== Auth::user()->id)
+                        <a href="{{ route('document.report', $document->id )}}" class="btn btn-danger ml-5 mb-2" style="float: right;">Report Document</a>
+                    @endif
                         @can('update', $document->user->profile)
                             <a href="{{route('document.delete',[$user->id, $document->id])}}" class="btn btn-danger" style="float: right;color:white;" onclick="return confirm('Are you sure you want to delete this post?')">Delete Document</a>
                             <a href="{{route('document.edit',[$user->id, $document->id])}}" class="btn btn-success ml-3" style="float: right;color:white;margin-right:8px;">Edit Document</a>
                         @endcan
                         <div class="d-flex ">   
                             <div class="pr-4"><strong >{{ $document->created_at }}</strong> </div>
-                            <div class="pr-4"><strong >0</strong> Reviews</div>
+                            <div class="pr-4"><strong >3</strong> Reviews</div>
                             <div class="pr-4"><strong >1</strong> Purchased</div>          
                         </div> 
                         <hr>
@@ -149,7 +153,9 @@
             
    
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="text-align:center">
+                <h4 style="text-align:center;font-weight:600">Purchase & Download Now</h4>
+                <hr>
                 <?php $path_parts = pathinfo($document->document );
                 if ($path_parts['extension'] == "doc") {
                     echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;float: right;margin-top:5px;" />';
@@ -186,7 +192,7 @@
     </div>
     <div class="card mt-3">
         <div class="card-body">
-           <h2 style="text-align:center">Reviews</h2>
+           <h2 style="text-align:center;font-weight:600">Reviews</h2>
            <hr>
            <div>
                 

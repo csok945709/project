@@ -10,7 +10,7 @@ class Document extends Model
     protected $table = "documents";
 
     protected $fillable = [
-        'caption','description','document','price'
+        'caption','description','document','price', 'documentStatus'
     ];
     
     use Rateable;

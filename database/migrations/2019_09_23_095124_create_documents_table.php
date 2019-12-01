@@ -19,6 +19,7 @@ class CreateDocumentsTable extends Migration
             $table->string('caption');
             $table->text('description');
             $table->string('document');
+            $table->boolean('documentStatus')->default(1);
             $table->integer('price')->default(0);
             $table->timestamps();
 

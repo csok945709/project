@@ -20,24 +20,44 @@
 </div>
 <div class="row">
         @foreach ($user->documents as $document)
-            <div class="container card mb-3">
-                <div class="card-body">  
-                    <?php $path_parts = pathinfo($document->document );
-                    if ($path_parts['extension'] == "doc") {
-                        echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
-                        
-                    } elseif ($path_parts['extension'] == "pdf") {
-                        echo '<img src="/storage/document/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
-                    } elseif ($path_parts['extension'] == "docx") {
-                        echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
-                    }
-                    ?>
-                <a href="{{ route('document.show', [$user->id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    
-                    <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($document->description,$words = 100, $end = '...') !!}</div>
-                    <a href="{{route('post.edit',[$user->id, $document->id])}}" class="btn btn-success" style="color:white;margin-right:8px;">Edit Post</a>
-                    <a  href="{{ route('post.delete', [ $user->id, $document->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</a>
+            @if ($document->documentStatus == true)
+                <div class="container card mb-3">
+                        <div class="card-body">  
+                            <?php $path_parts = pathinfo($document->document );
+                            if ($path_parts['extension'] == "doc") {
+                                echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                                
+                            } elseif ($path_parts['extension'] == "pdf") {
+                                echo '<img src="/storage/document/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            } elseif ($path_parts['extension'] == "docx") {
+                                echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            }
+                            ?>
+                        <a href="{{ route('document.show', [$user->id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    
+                            <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($document->description,$words = 100, $end = '...') !!}</div>
+                            <a href="{{route('post.edit',[$user->id, $document->id])}}" class="btn btn-success" style="color:white;margin-right:8px;">Edit Post</a>
+                            <a  href="{{ route('post.delete', [ $user->id, $document->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')" >Delete</a>
+                        </div>
+                    </div>
+            @else
+            <div class="container card mb-3" style="background: #f2f2f2;">
+                    <div class="card-body">  
+                        <?php $path_parts = pathinfo($document->document );
+                        if ($path_parts['extension'] == "doc") {
+                            echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            
+                        } elseif ($path_parts['extension'] == "pdf") {
+                            echo '<img src="/storage/document/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                        } elseif ($path_parts['extension'] == "docx") {
+                            echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                        }
+                        ?>
+                    <a href="{{ route('document.show', [$user->id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    
+                        <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($document->description,$words = 100, $end = '...') !!}</div>
+                        <strong style="color:red; font-size:20px">*Remark: Your Document has been suspended by the Admin.</strong>
+                    </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
 </div>

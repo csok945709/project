@@ -26,13 +26,33 @@ Route::prefix('admin')->group(function() {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    //User
     Route::get('/userDetail', 'AdminController@userDetail')->name('admin.userDetail');
+    Route::get('/banUser/{user}', 'AdminController@banUser')->name('admin.banUser');
+    Route::get('/reactiveUser/{user}', 'AdminController@reactiveUser')->name('admin.reactiveUser');
+    //Consultant
     Route::get('/consultantDetail', 'AdminController@consultantDetail')->name('admin.consultantDetail');
+    Route::get('/consultantRequest', 'AdminController@consultantRequest')->name('admin.consultantRequest');
+    Route::get('/consultantRequest/show/{conApply}', 'AdminController@showCon')->name('admin.showCon');
+    Route::get('/approveConsultant/{conApply}', 'AdminController@approveConsultant')->name('admin.approveConsultant');
+    //Organizer
     Route::get('/organizerDetail', 'AdminController@organizerDetail')->name('admin.organizerDetail');
     Route::get('/organizerRequest', 'AdminController@organizerRequest')->name('admin.organizerRequest');
-    Route::get('/approveOrganizer/show/{orgApply}', 'AdminController@showOrg')->name('admin.showOrg');
+    Route::get('/organizerRequest/show/{orgApply}', 'AdminController@showOrg')->name('admin.showOrg');
     Route::get('/approveOrganizer/{orgApply}', 'AdminController@approveOrganizer')->name('admin.approveOrganizer');
-    
+    //Document 
+    Route::get('/documentTransaction', 'AdminController@documentTransaction')->name('admin.documentTransaction');
+    Route::get('/reportDocument', 'AdminController@reportDocument')->name('admin.reportDocument');
+    Route::get('/showReportDoc/{document}', 'AdminController@showReportDoc')->name('admin.showReportDoc');
+    Route::get('/adminDocDownload/{document}', 'AdminController@adminDocDownload')->name('admin.adminDocDownload');
+    Route::get('/approveDocReport/{document}', 'AdminController@approveDocReport')->name('admin.approveDocReport');
+    Route::get('/reactiveDoc/{document}', 'AdminController@reactiveDoc')->name('admin.reactiveDoc');
+    //Post
+    Route::get('/reportPost', 'AdminController@reportPost')->name('admin.reportPost');
+    Route::get('/approvePostReport/{post}', 'AdminController@approvePostReport')->name('admin.approvePostReport');
+    Route::get('/reactivePost/{post}', 'AdminController@reactivePost')->name('admin.reactivePost');
+    Route::get('/showReportPost/{post}', 'AdminController@showReportPost')->name('admin.showReportPost');
+
 });
 
 
@@ -53,6 +73,9 @@ Route::patch('/d/{user}/{documentID}', 'KnowledgesController@update')->name('doc
 Route::get('/d/{user}/{document}/show', 'KnowledgesController@show')->name('document.show');
 Route::get('/d/{user}/{document}/show/download', 'KnowledgesController@download')->name('document.download');
 Route::post('/ratingDocument/{document}', 'KnowledgesController@documentStar')->name('documentStar');
+Route::get('/d/report/{document}', 'KnowledgesController@report')->name('document.report');
+Route::post('/reportStore/{document}', 'KnowledgesController@reportStore')->name('document.reportStore');
+
 
 //Knowledge Comment 
 Route::resource('/Knowledegecomments','KnowledgeCommentsController');
@@ -79,6 +102,10 @@ Route::get('/profile/forum/{user}', 'ProfilesController@indexForum')->name('prof
 Route::get('/profile/edit/{user}', 'ProfilesController@edit')->name('profile.edit');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.index');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
+Route::get('/profile/reportDocDetails/{user}', 'ProfilesController@reportDocDetails')->name('profile.reportDocDetails');
+Route::get('/profile/reportPostDetails/{user}', 'ProfilesController@reportPostDetails')->name('profile.reportPostDetails');
+
+
 
 
 
@@ -96,6 +123,8 @@ Route::get('/p/{user}/{post}/show', 'PostsController@show')->name('post.show');
 Route::get('/p/{user}/{post}/delete', 'PostsController@delete')->name('post.delete');
 Route::post('/p', 'PostsController@store')->name('post.store');
 Route::post('upload_image','CkeditorController@uploadImage')->name('upload');
+Route::get('/p/report/{post}', 'PostsController@reportPost')->name('post.reportPost');
+Route::post('/p/reportStore/{post}', 'PostsController@reportStore')->name('post.reportStore');
 //Comment 
 Route::resource('/comments','CommentsController');
 Route::resource('/p/{post}/comments','CommentsController');

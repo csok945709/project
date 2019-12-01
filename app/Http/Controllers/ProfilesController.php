@@ -13,13 +13,15 @@ use App\Course;
 use App\Question;
 use App\ConsulantAppointment;
 use App\WorkingHour;
+use App\DocumentReport;
 
 class ProfilesController extends Controller
 {
     public function index(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-        return view('profiles.blogIndex',compact('user', 'follows'));
+        $personalID = Auth::user()->id;
+        return view('profiles.blogIndex',compact('user', 'follows', 'personalID'));
     }
 
     public function consultantTime(User $user)
@@ -40,6 +42,7 @@ class ProfilesController extends Controller
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $documents = Document::where('user_id', $user)->latest()->paginate(5);
+        $personalID = Auth::user()->id;
         return view('profiles.documentIndex',compact('user','documents','follows'));
     }
 
@@ -117,5 +120,25 @@ class ProfilesController extends Controller
     }
     
 
-
+    public function reportDocDetails(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $reports = DB::table('document_reports')
+        ->join('documents', 'documents.id', '=', 'document_reports.document_id')
+        ->join('users', 'users.id', '=', 'document_reports.report_by')
+        ->where('document_reports.report_by', '=', $user->id)
+        ->get();
+        return view('profiles.reportDocIndex',compact('user','reports','follows'));
+    }
+    
+    public function reportPostDetails(User $user)
+    {
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $reports = DB::table('post_reports')
+        ->join('posts', 'posts.id', '=', 'post_reports.post_id')
+        ->join('users', 'users.id', '=', 'post_reports.report_by')
+        ->where('post_reports.report_by', '=', $user->id)
+        ->get();
+        return view('profiles.reportPostIndex',compact('user','reports','follows'));
+    }
 }

@@ -4,40 +4,43 @@
 <div class="row">
 @include('admin/sidebar')
     <div class="col-8">
-    <h1 style="text-align:center">Organizer Request</h1>
+    <h1 style="text-align:center">Posts Report</h1>
         <table id="UserData" class="display">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Experience</th>
-                    <th>Work Years</th>
+                    <th>Report Type</th>
+                    <th>Post Name</th>
+                    <th>Report Content</th>
+                    <th>Report By</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($applyData as $apply)
+                @foreach ($reports as $report)
                     
                 
                 <tr>
                     <td></td>
-                    <td>{{ $apply->name }}</td>
-                    <td>{{$apply->experience }}</td>
-                    <td>{{ $apply->workyears }}</td>
-                    <td>@if ( $apply->status == 0)
-                        Pending
+                    <td>{{ $report->reportType }}</td>
+                    <td>{{$report->caption }}</td>
+                    <td>{!! str_limit($report->reportDescription,$words = 50, $end = '...') !!}</td>
+                    <td>{{ $report->username }}</td>
+                    <td>@if ( $report->reportStatus == 0)
+                            <span style="color:red;font-weight:600">Pending</span>
                     @else
-                        Approved
+                    <span style="color:red;font-weight:600">Approved and Suspended</span>
                     @endif
                     </td>
                     <td>
-                            <a href="{{ route('admin.showOrg', [$apply->user_id]) }}" class="btn btn-secondary" style="color:white" >View More</a>
-                            @if ($apply->status == 0)
-                                <a href="{{route('admin.approveOrganizer', [$apply->user_id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Approve this request ?')">Approve</a>
+                            <a href="{{ route('admin.showReportPost', [$report->post_id]) }}" class="btn btn-secondary" style="color:white" >View More</a>
+                            @if ($report->reportStatus == 0)
+                                <a href="{{route('admin.approvePostReport', [$report->post_id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Approve and Suspend this Post ?')">Suspend Post</a>
                                 <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to Disapprove this request ?')">Disapprove</a>
                             @else
-                                <a href="{{route('admin.approveOrganizer', [$apply->user_id] )}}" class="btn btn-success" disable>Approved</a>  
+                                <a href="#" class="btn btn-success" disable>Approved</a>  
+                                <a href="{{route('admin.reactivePost', [$report->post_id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Reactive this Post ?')">Reactived Document</a>  
                             @endif
                     </td>
                 </tr>

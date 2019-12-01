@@ -4,39 +4,31 @@
 <div class="row">
 @include('admin/sidebar')
     <div class="col-8">
-        <h1 style="text-align:center">User Details</h1>
+        <h1 style="text-align:center">Document Transaction Details</h1>
         <table id="UserData" class="display">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Username</th>
+                    <th>Document Name</th>
+                    <th>Published</th>
+                    <th>Buyer</th>
+                    <th>Price</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($transactions as $transaction)
                     
                 
                 <tr>
                     <td></td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->username }}</td>
-                    <td>@if ( $user->status == 1)
-                            Actived
-                        @else
-                            Suspend
-                        @endif</td>
+                    <td>{{ $transaction->caption }}</td>
+                    <td>{{  DB::table('users')->where('users.id', $transaction->user_id)->get('username')->pluck('username')->first()  }}</td>p
+                    <td>{{ $transaction->username }}</td>b
+                    <td>{{ $transaction->price }}</td>
                     <td>
-                    <a href="#" class="btn btn-secondary">View More</a>
-                    @if ($user->status == 1)
-                        <a href="{{route('admin.banUser', [$user->id] )}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Ban this User ?')">Ban User</a>
-                    @else
-                        <a href="{{route('admin.reactiveUser', [$user->id] )}}" class="btn btn-success" onclick="return confirm('Are you sure you want to Reactive this User ?')">Reactive User</a>
-                    @endif
+                            <span style="color:green;font-weight:600">Complete</span>
+                    
                     </td>
                 </tr>
                 @endforeach

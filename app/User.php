@@ -86,6 +86,16 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
     
+    public function docReport()
+    {
+        return $this->hasMany(DocumentReport::class, 'report_by', 'id');
+    }
+
+    public function postReport()
+    {
+        return $this->hasMany(PostReport::class, 'report_by', 'id');
+    }
+
     public function rewards()
     {
         return $this->hasMany(Reward::class, 'reward_by', 'id');

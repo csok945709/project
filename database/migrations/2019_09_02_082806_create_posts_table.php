@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('caption');
             $table->text('description');
             $table->string('image');
+            $table->boolean('postStatus')->default(1);
             $table->integer('visit_count')->default(1);
             $table->timestamps();
 

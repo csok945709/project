@@ -6,6 +6,9 @@
         <div class="col-7 mr-3">
             <div class="card">
                 <div class="card-body">
+                    @if ($post->user_id !== Auth::user()->id)
+                        <a href="{{ route('post.reportPost', $post->id )}}" class="btn btn-danger ml-5 mb-2" style="float: right;">Report Post</a>
+                    @endif
                     <strong style="font-size:28px;font-weight:900">{{ $post->caption }}</strong> 
                     @can('update', $post->user->profile)
                         <a href="{{route('post.delete',[$post->user_id , $post->user->id])}}" class="btn btn-danger" style="float: right;color:white;" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</a>

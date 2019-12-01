@@ -10,19 +10,19 @@
                     
                     <h4 style="font-weight:600;margin-top:10px">Transaction Manage</h4>
                     <hr>
-                    <a href="#" style="text-decoration:none;font-size:18px">Online Course Transaction</a><br/>
-                    <a href="#" style="text-decoration:none;font-size:18px">Document Transaction</a><br/>
-                    <a href="#" style="text-decoration:none;font-size:18px">Bounty Question Transaction</a><br/>
+                    <a href="#" style="text-decoration:none;font-size:17px">Online Course Transaction</a><br/>
+                    <a href="{{route('admin.documentTransaction')}}" style="text-decoration:none;font-size:17px">Document Transaction</a><br/>
+                    <a href="#" style="text-decoration:none;font-size:17px">Bounty Question Transaction</a><br/>
 
                     <h4 style="font-weight:600;margin-top:10px">Request Manage</h4>
                     <hr>
-                    <a href="#" style="text-decoration:none;font-size:18px">Consultant Request</a><br/>
+                    <a href="{{route('admin.consultantRequest')}}" style="text-decoration:none;font-size:18px">Consultant Request</a><br/>
                 <a href="{{ route('admin.organizerRequest') }}" style="text-decoration:none;font-size:18px">Organizer Request</a><br/>
 
                     <h4 style="font-weight:600;margin-top:10px">Report Manage</h4>
                     <hr>
-                    <a href="#" style="text-decoration:none;font-size:18px">Post Report</a><br/>
-                    <a href="#" style="text-decoration:none;font-size:18px">Document Report</a><br/>
+                <a href="{{route('admin.reportPost')}}" style="text-decoration:none;font-size:18px">Post Report</a><br/>
+                <a href="{{route('admin.reportDocument')}}" style="text-decoration:none;font-size:18px">Document Report</a><br/>
                 </div>
             </div>
         </div>

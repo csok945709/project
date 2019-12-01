@@ -15,7 +15,7 @@ use App\User;
 use App\Like;
 use App\Comment;
 use App\Reply;
-
+use App\PostReport;
 class PostsController extends Controller
 {
 public function __construct()
@@ -29,8 +29,7 @@ public function __construct()
 
       public function index()
     {
-        $user = auth()->user()->pluck('id')->all(); 
-        $posts = Post::whereIn('user_id', $user)->latest()->paginate(5);
+        $posts = Post::where('postStatus', true)->latest()->paginate(5);
 
         return view('posts.index',compact('posts'));
     }
@@ -38,7 +37,7 @@ public function __construct()
     public function indexFollow()
     {
         $user = auth()->user()->following()->pluck('profiles.user_id'); 
-        $postsFollow = Post::whereIn('user_id', $user)->latest()->paginate(5);
+        $postsFollow = Post::whereIn('user_id', $user)->where('postStatus', true)->latest()->paginate(5);
         return view('posts.indexFollow',compact('postsFollow'));
     }
 
@@ -116,4 +115,26 @@ public function __construct()
         return redirect()->route('post.show', [$user,$post]);
     }
 
+    public function reportPost(Post $post)
+  {
+     $post = Post::where('id', $post->id)->first();
+     return view('posts.reportPost',compact('post'));
+  }
+  
+  public function reportStore(Post $post)
+    {
+        $data = request()->validate([
+            'caption' => 'required',
+            'description' => 'required',
+        ]);
+        
+        auth()->user()->postReport()->create([
+            'reportType' => $data['caption'],
+            'reportDescription' =>$data['description'],
+            'post_id' => $post->id,
+            'report_by' => Auth::user()->id,
+        ]);
+        
+        return redirect()->route('profile.reportPostDetails', [Auth::user()->id]);
+    }
 }
