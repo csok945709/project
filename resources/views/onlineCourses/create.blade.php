@@ -47,7 +47,7 @@
                         @enderror
                 </div>
                 <div class="form-group row">
-                    <label for="duration" class="col-md-4 col-form-label">Course Duration</label>                 
+                    <label for="duration" class="col-md-4 col-form-label">Course Duration (Hours)</label>                 
                         <input id="duration" 
                                 type="text" 
                                 class="form-control @error('duration') is-invalid @enderror" 
@@ -142,7 +142,7 @@
                             @enderror
                     </div> 
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Create New Course</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to Create this Course ?')">Create New Course</button>
                 </div>
             </form>
         </div>

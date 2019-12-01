@@ -26,7 +26,6 @@
                             }
                             ?>  
                             <h1 class="ml-5 mt-5"><span style="font-weight:600">Caption:</span> {{$repDoc->caption}}</h1>
-
                     </div>
                             <div style="text-align:center">
                               
@@ -46,8 +45,9 @@
                     
                 <div class="mt-3">
                     <a href="{{ route('admin.reportDocument') }}" class="btn btn-secondary">Back to Index</a>
-                    <a href="{{ route('admin.adminDocDownload', [$repDoc->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
-                    
+                    <a href="{{ route('admin.adminDocDownload', [$document->id]) }}" class="btn btn-success" style="color:white;text-decoration:none;cursor:pointer;width:130px;">Download Now</a>
+                    <a href="{{route('admin.approveDocReport', [$document->id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Approve and Suspend this Document ?')">Suspend Document</a>
+                    <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to Disapprove this request ?')">Disapprove</a>
                 </div>
             </div>
         </div>

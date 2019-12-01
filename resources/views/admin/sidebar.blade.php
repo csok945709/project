@@ -10,9 +10,9 @@
                     
                     <h4 style="font-weight:600;margin-top:10px">Transaction Manage</h4>
                     <hr>
-                    <a href="#" style="text-decoration:none;font-size:17px">Online Course Transaction</a><br/>
+                <a href="{{route('admin.courseTransaction')}}" style="text-decoration:none;font-size:17px">Online Course Transaction</a><br/>
                     <a href="{{route('admin.documentTransaction')}}" style="text-decoration:none;font-size:17px">Document Transaction</a><br/>
-                    <a href="#" style="text-decoration:none;font-size:17px">Bounty Question Transaction</a><br/>
+                <a href="{{route('admin.questionTransaction')}}" style="text-decoration:none;font-size:17px">Bounty Question Transaction</a><br/>
 
                     <h4 style="font-weight:600;margin-top:10px">Request Manage</h4>
                     <hr>

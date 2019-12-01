@@ -52,7 +52,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/approvePostReport/{post}', 'AdminController@approvePostReport')->name('admin.approvePostReport');
     Route::get('/reactivePost/{post}', 'AdminController@reactivePost')->name('admin.reactivePost');
     Route::get('/showReportPost/{post}', 'AdminController@showReportPost')->name('admin.showReportPost');
-
+    //Online Course
+    Route::get('/courseTransaction', 'AdminController@courseTransaction')->name('admin.courseTransaction');
+    //Question
+    Route::get('/questionTransaction', 'AdminController@questionTransaction')->name('admin.questionTransaction');
 });
 
 

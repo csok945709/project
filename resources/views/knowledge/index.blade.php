@@ -28,10 +28,18 @@
                                     <a href="{{ route('document.show', [$document->user_id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    
                                     <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($document->description,$words = 100, $end = '...') !!}</div>
                                     
-                                    <div style="">
-                                        <h5 style="font-size:16px;font-weight:700;padding-top:15px;display: inline-block;padding-right:5px;">Rm {{$document->price }}</h5>
-                                        <img src="{{ $document->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
+                                    <div>
+                                        @if ($document->price !== 0)
+                                            <h5 style="font-size:16px;font-weight:700;padding-top:15px;display: inline-block;padding-right:5px;">Rm {{$document->price }}</h5>
+                                        @else
+                                            <strong style="font-size:20px;color:green">Free</strong>
+
+                                        @endif
+                                        
+                                       <div>
+                                            <img src="{{ $document->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
                                         <a href="{{ route('profile.index', [$document->user->id]) }}" style="text-decoration:none"><strong style="font-size:12px;"> {{ $document->user->username }} </strong></a>
+                                       </div>
                                     </div>
                                 </div>                         
                         </div>

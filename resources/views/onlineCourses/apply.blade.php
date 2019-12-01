@@ -47,7 +47,7 @@
                     @enderror
                 </div>
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Submit Apply Form</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to Submit this Apply Form ?')">Submit Apply Form</button>
                 </div>
             </form>
         </div>

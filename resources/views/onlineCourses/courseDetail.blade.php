@@ -100,58 +100,60 @@
                             {{$course->user->profile->description}}
                     </div>
             </div>
+            @if ($course->user->id !== Auth::user()->id)
             <div class="card">
-                    <div class="card-body">
-                            <h4 style="text-align:center;font-weight:600;">Register Now</h4>
+                <div class="card-body">
+                        <h4 style="text-align:center;font-weight:600;">Register Now</h4>
+                        <hr>
+                         
+                    @if ($courseRegCheck !== 0)
+                        @if ($courseRegCheck->course_id == $course->id && $courseRegCheck->user_id == Auth::user()->id && $courseRegCheck->status == true) 
+                            <strong style="font-size:20px;color:green" class="ml-5">Register Success </strong><i class="fa fa-check" style="font-size:30px;color:green"></i>
                             <hr>
-                             
-                        @if ($courseRegCheck !== 0)
-                            @if ($courseRegCheck->course_id == $course->id && $courseRegCheck->user_id == Auth::user()->id && $courseRegCheck->status == true) 
-                                <strong style="font-size:20px;color:green" class="ml-5">Register Success </strong><i class="fa fa-check" style="font-size:30px;color:green"></i>
-                                <hr>
-                                <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
+                            <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
+                            @else
+                        <div style="text-align:center;">  
+                            @if ($course->price !== 0)
+                                @if ($courseCount == 1)
+                                    @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id &&  $courseRegCheck->status == true)
+                                        <strong>Register Success</strong>
+                                        <hr>
+                                        <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
+                                    @endif
                                 @else
-                            <div style="text-align:center;">  
-                                @if ($course->price !== 0)
-                                    @if ($courseCount == 1)
-                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id &&  $courseRegCheck->status == true)
-                                            <strong>Register Success</strong>
-                                            <hr>
-                                            <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
-                                        @endif
-                                    @else
-                                        <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
-                                        {{-- Need Pay --}}
-                                        <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
-                                    @endif
-                                    
-                            @else
-                                    <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
-                            @endif
-                            </div>
-                            @endif 
+                                    <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
+                                    {{-- Need Pay --}}
+                                    <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
+                                @endif
+                                
                         @else
-                            <div style="text-align:center;">  
-                                @if ($course->price !== 0)
-                                    @if ($courseCount == 1)
-                                        @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id && $courseRegCheck->status == true)
-                                            <strong>Register Success</strong>
-                                            <hr>
-                                            <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
-                                        @endif
-                                    @else
-                                        <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
-                                        {{-- Need Pay --}}
-                                        <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
-                                    @endif
-                                    
-                            @else
-                                    <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
-                            @endif
-                            </div>
+                                <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
                         @endif
                         </div>
-            </div>
+                        @endif 
+                    @else
+                        <div style="text-align:center;">  
+                            @if ($course->price !== 0)
+                                @if ($courseCount == 1)
+                                    @if ($course->id === $courseIdCheck->course_id && Auth::user()->id === $payerId->buyer_id && $courseRegCheck->status == true)
+                                        <strong>Register Success</strong>
+                                        <hr>
+                                        <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
+                                    @endif
+                                @else
+                                    <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
+                                    {{-- Need Pay --}}
+                                    <a href="{{ route('coursePayment.payment',[$course->id]) }}" class="btn btn-success mb-2">Pay Paypal</a>
+                                @endif
+                                
+                        @else
+                                <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
+                        @endif
+                        </div>
+                    @endif
+                    </div>
+        </div>
+            @endif
             <div class="card mt-3">
                     <div class="card-body">
                        <h2 style="text-align:center">Reviews</h2>
@@ -222,7 +224,7 @@
                    @endif
            
                    
-                   <strong style="font-size:20px">{{ $ratingAve}}</strong>
+                   <strong style="font-size:20px">{{ $ave }}</strong>
                    <div class="ml-2" style="text-align:center"><i class="fa fa-users" aria-hidden="true" style="font-size:35px;"></i><strong style="font-size:15px">{{ $ratingCount}} Person</strong></div>
            </div>
             

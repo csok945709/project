@@ -51,27 +51,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($courseRegData as $courseData)
+                @foreach ($applyDetails as $applyDetail)
                     
                 
                 <tr>
                     <td></td>
-                    <td>{{ $courseData->title }}</td>
-                    <td>{!! $courseData->description !!}</td>
-                    <td>{{ $courseData->venue }}</td>
-                    <td>{{ $courseData->language }}</td>
-                    <td>{{ $courseData->time }}</td>
-                    <td>{{ $courseData->date }}</td>
-                    <td>{{ $courseData->price }}</td>
-                    <td>@if ($courseData->status == true)
-                        Paid
+                    <td>{{ $applyDetail->title }}</td>
+                    <td>{!! $applyDetail->description !!}</td>
+                    <td>{{ $applyDetail->venue }}</td>
+                    <td>{{ $applyDetail->language }}</td>
+                    <td>{{ $applyDetail->time }}</td>
+                    <td>{{ $applyDetail->date }}</td>
+                    <td>@if ($applyDetail->price !== 0)
+                        {{ $applyDetail->price }}
                     @else
-                        Cancel
+                        <span style="font-size:18px;color:green;font-weight:600">Free</span>
                     @endif</td>
+                    <td>Paid</td>
                     <td class="d-flex">
-                    <a href="{{ route('course.detail', [Auth::user()->id, $courseData->id]) }}" class="btn btn-primary">View More</a>   
-                    @if ($courseData->status == true)
-                        <a href="{{ route('course.cancelRegister', [Auth::user()->id, $courseData->id]) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>            
+                    <a href="{{ route('course.detail', [Auth::user()->id, $applyDetail->course_id]) }}" class="btn btn-primary">View More</a>   
+                    @if ($applyDetail->status == 1)
+                        <a href="{{ route('course.cancelRegister', [Auth::user()->id, $applyDetail->id]) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>            
                     @else
                         <a href="#" class="btn btn-success ml-2" readonly>Cancel Successfull</a>            
                     @endif

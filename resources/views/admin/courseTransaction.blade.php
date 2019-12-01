@@ -4,13 +4,13 @@
 <div class="row">
 @include('admin/sidebar')
     <div class="col-8">
-        <h1 style="text-align:center">Document Transaction Details</h1>
+        <h1 style="text-align:center">Online Course Transaction Details</h1>
         <table id="UserData" class="display">
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Document Name</th>
-                    <th>Published</th>
+                    <th>Course Name</th>
+                    <th>Organizer</th>
                     <th>Buyer</th>
                     <th>Price</th>
                     <th>Status</th>
@@ -22,7 +22,7 @@
                 
                 <tr>
                     <td></td>
-                    <td>{{ $transaction->caption }}</td>
+                    <td>{{ $transaction->title }}</td>
                     <td>{{  DB::table('users')->where('users.id', $transaction->user_id)->get('username')->pluck('username')->first()  }}</td>
                     <td>{{ $transaction->username }}</td>
                     <td>{{ $transaction->price }}</td>

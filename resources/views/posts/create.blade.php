@@ -42,7 +42,7 @@
                     @enderror
                 </div>
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Add New Post</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to Create this Post ?')">Add New Post</button>
                 </div>
             </form>
         </div>

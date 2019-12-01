@@ -61,7 +61,11 @@
                             <td>{{ $applicantDetail->venue }}</td>        
                             <td>{{ $applicantDetail->date }}</td>
                             <td>{{ $applicantDetail->time }}</td>
-                            <td>{{ $applicantDetail->price }}</td>
+                            <td>@if ($applicantDetail->price !== 0)
+                                {{ $applicantDetail->price }}
+                            @else
+                                <span style="font-size:18px;color:green;font-weight:600">Free</span>
+                            @endif</td>
                             <td>@if ($applicantDetail->status == true)
                                 Paid
                             @else
@@ -69,11 +73,6 @@
                             @endif</td>
                             <td class="d-flex">
                             <a href="{{ route('course.detail', [Auth::user()->id, $applicantDetail->id]) }}" class="btn btn-primary">View More</a>   
-                            @if ($applicantDetail->status == true)
-                                <a href="{{ route('course.cancelRegister', [Auth::user()->id, $applicantDetail->id]) }}" class="btn btn-danger ml-2" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>            
-                            @else
-                                <a href="#" class="btn btn-success ml-2" readonly>Cancel Successfull</a>            
-                            @endif
                         </td>
                         </tr>
                 

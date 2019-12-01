@@ -129,7 +129,25 @@ class AdminController extends Controller
         ->get();
         return view('admin.documentTransaction', compact('transactions'));
     }
+
+    public function courseTransaction()
+    {
+        $transactions = DB::table('courses')
+        ->join('course_invoices', 'course_invoices.course_id', '=', 'courses.id')
+        ->join('users', 'users.id', '=', 'course_invoices.buyer_id')
+        ->get();
+        return view('admin.courseTransaction', compact('transactions'));
+    }
     
+    public function questionTransaction()
+    {
+        $transactions = DB::table('questions')
+        ->join('question_invoices', 'question_invoices.question_id', '=', 'questions.id')
+        ->join('users', 'users.id', '=', 'question_invoices.buyer_id')
+        ->get();
+        return view('admin.courseTransaction', compact('transactions'));
+    }
+
     public function reportDocument()
     {
         $reports = DB::table('document_reports')
@@ -143,7 +161,7 @@ class AdminController extends Controller
     {
         $repDoc = Document::where('id', $document->id)->first();
         $profile = Profile::where('user_id', $repDoc->user_id)->first();
-        return view('admin.showRepDoc', compact('repDoc', 'profile'));
+        return view('admin.showRepDoc', compact('repDoc', 'profile', 'document'));
     }
     
     public function adminDocDownload(Document $document)
@@ -214,6 +232,6 @@ class AdminController extends Controller
     {
         $repPost = Post::where('id', $post->id)->first();
         $profile = Profile::where('user_id', $repPost->user_id)->first();
-        return view('admin.showRepPost', compact('repPost', 'profile'));
+        return view('admin.showRepPost', compact('repPost', 'profile', 'post'));
     }
 }

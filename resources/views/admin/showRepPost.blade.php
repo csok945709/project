@@ -19,11 +19,6 @@
 
                     </div>
                             <div style="text-align:center">
-                              
-                                        
-                                          
-                               
-                                   
                                     <h1 style="font-weight:600">Description</h1>
                                     <hr>
                                     {!! $repPost->description !!}
@@ -36,7 +31,13 @@
                     
                 <div class="mt-3">
                     <a href="{{ route('admin.reportPost') }}" class="btn btn-secondary">Back to Index</a>
-                    
+                    @if ($repPost->postStatus == 1)
+                                <a href="{{route('admin.approveDocReport', [$post->id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Approve and Suspend this Document ?')">Suspend Document</a>
+                                <a href="#" class="btn btn-danger" onclick="return confirm('Are you sure you want to Disapprove this request ?')">Disapprove</a>
+                            @else
+                                <a href="#" class="btn btn-success" disable>Approved</a>  
+                                <a href="{{route('admin.reactiveDoc', [$post->id] )}}" class="btn btn-primary" onclick="return confirm('Are you sure you want to Reactive this Document ?')">Reactived Document</a>  
+                            @endif
                 </div>
             </div>
         </div>

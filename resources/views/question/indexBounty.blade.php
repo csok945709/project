@@ -65,9 +65,9 @@
                         </div>
                         <hr>
                         <img src="{{ \Auth::user()->profile->profileImage() }}" class="rounded-circle mb-2" style="max-width:50px">
-                        <a href="{{ route('profile.index', [\Auth::user()->id]) }}" style="text-decoration:none"><strong style="font-size:20px;"> {{ \Auth::user()->username }} </strong></a>
+                        <a href="{{ route('profile.indexQuestion', [\Auth::user()->id]) }}" style="text-decoration:none"><strong style="font-size:20px;"> {{ \Auth::user()->username }} </strong></a>
                     <a href="{{ route('question.create')}}"><button class="btn btn-success mb-2" style="width:100%;border-radius:4px;">Ask Question</button></a><br />
-                        <a href="{{route('profile.index', [\Auth::user()->id])}}"><button class="btn btn-primary"  style="width:100%;border-radius:4px;">View My Question</button></a>
+                        <a href="{{route('profile.indexQuestion', [\Auth::user()->id])}}"><button class="btn btn-primary"  style="width:100%;border-radius:4px;">View My Question</button></a>
                     </div>
                 </div>     
             </div>

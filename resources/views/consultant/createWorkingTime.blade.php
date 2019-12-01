@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Update Appointment Time</button>
+                    <button class="btn btn-primary"  onclick="return confirm('Are you sure you want to Update this Appointment Time ?')">Update Appointment Time</button>
                 </div>
             </form>
         </div>

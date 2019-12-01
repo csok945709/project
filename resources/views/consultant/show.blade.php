@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         <div style="text-align:center">
-            <h1>Online Courses</h1> 
+            <h1>Consultant  {{ $consultant->username }}</h1> 
         </div>
         <div class="row">
             <div class="col-7">       
@@ -15,15 +15,15 @@
                         <div style="float:right;margin-right:15%">
                             <h1> {{ $consultant->username }} </h1>      
                             <div class="pt-4 font-weight-bold">{{ $consultant->profile->title }} </div>
-                            <div>{{ $consultant->profile->description }} </div>
                             <div><a href="#">{{ $consultant->profile->url }} </a></div>
                         </div>
                         
                         <div style="margin-left:10%">
                             <img src="{{ $consultant->profile->profileImage() }}" class="rounded-circle" style="width:30%">  
                         </div>
-                        <div>
-                                
+                        <div class="card-body">
+                            <h1 style="text-align:center">Description</h1><hr>
+                                <div>{{ $consultant->profile->description }} </div>
                         </div>
                     </div>
                 </div>

@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Booking Appointment</button>
+                    <button class="btn btn-primary"  onclick="return confirm('Are you sure you want to Book this Consultant ?')">Booking Appointment</button>
                 </div>
             </form>
         </div>

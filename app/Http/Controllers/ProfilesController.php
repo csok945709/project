@@ -66,7 +66,13 @@ class ProfilesController extends Controller
         $applyData = CourseInvoice::all();
         $courseRegId = DB::table('courseregister')->where('user_id', $user->id)->pluck('course_id')->toArray();
         $courseRegData = Course::whereIn('id', $courseRegId)->get();
-        return view('profiles.course.viewApply',compact('user','follows','applyData','courseRegData'));
+
+        $applyDetails = DB::table('courseregister')
+        ->join('courses', 'courses.id', '=', 'courseregister.course_id')
+        ->join('users', 'users.id', '=', 'courseregister.user_id')
+        ->where('courseregister.user_id', '=', $user->id)
+        ->get();
+        return view('profiles.course.viewApply',compact('user','follows','applyData','courseRegData', 'applyDetails'));
     }
 
     public function viewApplicant(User $user)

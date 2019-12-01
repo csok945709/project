@@ -58,7 +58,7 @@
                     Enter the Price : <input type="text" class="form-control" name="price">
                 </div>  
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Upload New Document</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to Upload this Document ?')">Upload New Document</button>
                 </div>
             </form>
         </div>

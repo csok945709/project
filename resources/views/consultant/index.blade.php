@@ -47,10 +47,6 @@
                                                         <span style="font-size:14px;font-weight:600;color:grey;margin-left:2px;">Johor</span>
                                                         <i class="fas fa-map-marker-alt" style="color:grey"></i> <br/>
                                                         {!! str_limit($profile->description,$words = 30, $end = '...') !!}
-                                                        <div class="d-flex">
-                                                            <strong>225</strong>Chat &nbsp;
-                                                            <strong>9.2</strong>Rating
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif

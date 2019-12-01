@@ -262,7 +262,7 @@
                 @endif
         
                 
-                <strong style="font-size:20px">{{ $ratingAve}}</strong>
+                <strong style="font-size:20px">{{ $ave}}</strong>
                 <div class="ml-2" style="text-align:center"><i class="fa fa-users" aria-hidden="true" style="font-size:35px;"></i><strong style="font-size:15px">{{ $ratingCount}} Person</strong></div>
         </div>
 

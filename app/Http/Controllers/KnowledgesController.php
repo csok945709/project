@@ -79,7 +79,9 @@ class KnowledgesController extends Controller
         $documentRating = Document::where('id', $document->id)->first();
         $ratingCount = Rating::where('rateable_type', 'App\Document')->where('rateable_id', $document->id)->count();
         $ratingAve = number_format($documentRating->userAverageRating, 2);
-        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount'));
+        $aver = $documentRating->averageRating(User::class);  
+        $ave = number_format($aver, 2);
+        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount', 'ave'));
     }
 
     public function download(User $user, Document $document)
