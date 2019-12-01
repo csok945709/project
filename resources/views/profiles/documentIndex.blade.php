@@ -25,12 +25,12 @@
                         <div class="card-body">  
                             <?php $path_parts = pathinfo($document->document );
                             if ($path_parts['extension'] == "doc") {
-                                echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                                echo '<img src="/picture/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                                 
                             } elseif ($path_parts['extension'] == "pdf") {
-                                echo '<img src="/storage/document/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                                echo '<img src="/picture/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                             } elseif ($path_parts['extension'] == "docx") {
-                                echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                                echo '<img src="/picture/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                             }
                             ?>
                         <a href="{{ route('document.show', [$user->id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    
@@ -44,12 +44,12 @@
                     <div class="card-body">  
                         <?php $path_parts = pathinfo($document->document );
                         if ($path_parts['extension'] == "doc") {
-                            echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            echo '<img src="/picture/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                             
                         } elseif ($path_parts['extension'] == "pdf") {
-                            echo '<img src="/storage/document/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            echo '<img src="/picture/pdf.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                         } elseif ($path_parts['extension'] == "docx") {
-                            echo '<img src="/storage/document/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
+                            echo '<img src="/picture/docx.png" style="width:150px;height:120px;float: right;margin-top:5px;" />';
                         }
                         ?>
                     <a href="{{ route('document.show', [$user->id,$document->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $document->caption !!}</a>    

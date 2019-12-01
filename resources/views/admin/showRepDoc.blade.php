@@ -17,12 +17,12 @@
                     <div class="row" style="margin-left:20%">
                             <?php $path_parts = pathinfo($repDoc->document );
                             if ($path_parts['extension'] == "doc") {
-                                echo '<img src="/storage/document/docx.png" />';
+                                echo '<img src="/picture/docx.png" />';
                                 
                             } elseif ($path_parts['extension'] == "pdf") {
-                                echo '<img src="/storage/document/pdf.png" />';
+                                echo '<img src="/picture/pdf.png" />';
                             } elseif ($path_parts['extension'] == "docx") {
-                                echo '<img src="/storage/document/docx.png" style="width:150px" />';
+                                echo '<img src="/picture/docx.png" style="width:150px" />';
                             }
                             ?>  
                             <h1 class="ml-5 mt-5"><span style="font-weight:600">Caption:</span> {{$repDoc->caption}}</h1>

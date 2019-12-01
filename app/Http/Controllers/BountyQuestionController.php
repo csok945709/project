@@ -66,9 +66,9 @@ class BountyQuestionController extends Controller
         $replies = AnswerReply::get();
         $rewards = Reward::where('question_id',  $question->id)->get();
         if ($questionData->question_type == 1 & $questionData->paid == 1) {
-            return view('question/showBounty', compact('questionData', 'follows','answers','replies', 'rewards'));
+            return view('question/showBounty', compact('questionData', 'follows','answers','replies', 'rewards','question'));
         } else {
-            return view('question/show', compact('questionData', 'follows','answers','replies'));
+            return view('question/show', compact('questionData', 'follows','answers','replies','question'));
         }
     }
 

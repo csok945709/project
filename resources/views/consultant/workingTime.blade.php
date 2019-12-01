@@ -34,7 +34,7 @@
                 events : [
                     @foreach($working_hours as $hour)
                     {
-                        title : '{{ $user->name}}' + 'Appointment Time',
+                        title : '{{ $user->username}}' + 'Appointment Time',
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}',
                         url : '{{ route('consultant.editWorkingHour', Auth::user()->id) }}'

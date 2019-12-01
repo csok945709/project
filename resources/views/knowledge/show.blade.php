@@ -88,49 +88,66 @@
                         @endforeach
                         
                         
-                        @if ($document->price !== 0)
-                                @if ($docCount == 1)
-                                    <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
-                                            <div style="padding: 10px;">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="comment" width="50%" placeholder="Leave Some Comment..."></textarea>
-                                                </div>
-                                            </div>
-                                            <div style="padding: 0 10px 0 10px;">
-                                                <div class="form-group">
-                                                    <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
-                                                </div>
-                                            </div>
-                                    </form>
-                                @else
-                                    <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
-                                            <div style="padding: 10px;">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" name="comment" width="50%" placeholder="You can leave the comment after purchased..." readonly></textarea>
-                                                </div>
-                                            </div>
-                                    </form>
-                                @endif
-                        @else
-                            <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
-                                    <div style="padding: 10px;">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="comment" width="50%" placeholder="Leave Some Comment..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div style="padding: 0 10px 0 10px;">
-                                        <div class="form-group">
-                                            <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
-                                        </div>
-                                    </div>
-                            </form>
-                        @endif
+                    @if ($document->user_id !== Auth::user()->id)
+                       @if ($document->price !== 0)
+                       @if ($docCount == 1)
+                           <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
+                                   {{ csrf_field() }}
+                                   <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
+                                   <div style="padding: 10px;">
+                                       <div class="form-group">
+                                           <textarea class="form-control" name="comment" width="50%" placeholder="Leave Some Comment..."></textarea>
+                                       </div>
+                                   </div>
+                                   <div style="padding: 0 10px 0 10px;">
+                                       <div class="form-group">
+                                           <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
+                                       </div>
+                                   </div>
+                           </form>
+                       @else
+                           <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
+                                   {{ csrf_field() }}
+                                   <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
+                                   <div style="padding: 10px;">
+                                       <div class="form-group">
+                                           <textarea class="form-control" name="comment" width="50%" placeholder="You can leave the comment after purchased..." readonly></textarea>
+                                       </div>
+                                   </div>
+                           </form>
+                       @endif
+               @else
+                   <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
+                           {{ csrf_field() }}
+                           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
+                           <div style="padding: 10px;">
+                               <div class="form-group">
+                                   <textarea class="form-control" name="comment" width="50%" placeholder="Leave Some Comment..."></textarea>
+                               </div>
+                           </div>
+                           <div style="padding: 0 10px 0 10px;">
+                               <div class="form-group">
+                                   <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
+                               </div>
+                           </div>
+                   </form>
+               @endif
+                       @else
+                       <form id="comment-form" method="post" action="{{ route('Knowledegecomments.store', [$document->id]) }}" >
+                        {{ csrf_field() }}
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" >
+                        <div style="padding: 10px;">
+                            <div class="form-group">
+                                <textarea class="form-control" name="comment" width="50%" placeholder="Leave Some Comment..."></textarea>
+                            </div>
+                        </div>
+                        <div style="padding: 0 10px 0 10px;">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" style="width: 100%" name="submit">
+                            </div>
+                        </div>
+                </form>
+                       @endif
 
                         
                     </div>
@@ -152,18 +169,19 @@
             </div>
             
    
+    @if ($document->user_id !== Auth::user()->id)
         <div class="card">
             <div class="card-body" style="text-align:center">
                 <h4 style="text-align:center;font-weight:600">Purchase & Download Now</h4>
                 <hr>
                 <?php $path_parts = pathinfo($document->document );
                 if ($path_parts['extension'] == "doc") {
-                    echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;float: right;margin-top:5px;" />';
+                    echo '<img src="/picture/docx.png" style="width:100px;height:auto;float: right;margin-top:5px;" />';
                     
                 } elseif ($path_parts['extension'] == "pdf") {
-                    echo '<img src="/storage/document/pdf.png" style="width:100px;height:auto;" />';
+                    echo '<img src="/picture/pdf.png" style="width:100px;height:auto;" />';
                 } elseif ($path_parts['extension'] == "docx") {
-                    echo '<img src="/storage/document/docx.png" style="width:100px;height:auto;margin-top: 20px;" />';
+                    echo '<img src="/picture/docx.png" style="width:100px;height:auto;margin-top: 20px;" />';
                 }
                 ?> 
                 @if ($document->price !== 0)
@@ -190,6 +208,7 @@
             </div>
   
     </div>
+        @endif
     <div class="card mt-3">
         <div class="card-body">
            <h2 style="text-align:center;font-weight:600">Reviews</h2>
@@ -262,7 +281,7 @@
                 @endif
         
                 
-                <strong style="font-size:20px">{{ $ave}}</strong>
+                <strong style="font-size:20px">{{ $ratingAve}}</strong>
                 <div class="ml-2" style="text-align:center"><i class="fa fa-users" aria-hidden="true" style="font-size:35px;"></i><strong style="font-size:15px">{{ $ratingCount}} Person</strong></div>
         </div>
 

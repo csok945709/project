@@ -34,7 +34,7 @@
                     @foreach($working_hours as $hour)
                     {
                         
-                        title : '{{ $user->name}}' + ' Appointment Hour',
+                        title : '{{ $user->username}}' + ' Appointment Hour',
                         start : '{{ $hour->date . ' ' . $hour->start_time }}',
                         end : '{{ $hour->date . ' ' . $hour->finish_time }}'
 

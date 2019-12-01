@@ -140,6 +140,9 @@
                                         <hr>
                                         <a href="{{ route('course.cancelRegister', [$user, $course->id]) }}" class="btn btn-danger ml-5" style="width:65%" onclick="return confirm('Are you sure you want to cancel this course register ?')">Cancel Register</a>
                                     @endif
+                                    @if ($courseRegCheck->status == false)
+                                        <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Register this course ?')">Register Now</a>
+                                    @endif
                                 @else
                                     <strong style="font-size:28px;font-weight:900;">RM {{ $course->price }}</strong><br/>
                                     {{-- Need Pay --}}
@@ -147,7 +150,7 @@
                                 @endif
                                 
                         @else
-                                <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success">Register Now</a>
+                                <a href="{{ route('course.register', [Auth::user()->id, $course->id]) }}" class="btn btn-success" onclick="return confirm('Are you sure you want to Register this course ?')">Register Now</a>
                         @endif
                         </div>
                     @endif
@@ -224,7 +227,7 @@
                    @endif
            
                    
-                   <strong style="font-size:20px">{{ $ave }}</strong>
+                   <strong style="font-size:20px">{{ $ratingAve }}</strong>
                    <div class="ml-2" style="text-align:center"><i class="fa fa-users" aria-hidden="true" style="font-size:35px;"></i><strong style="font-size:15px">{{ $ratingCount}} Person</strong></div>
            </div>
             

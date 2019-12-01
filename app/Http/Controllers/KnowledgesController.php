@@ -70,6 +70,7 @@ class KnowledgesController extends Controller
 
     public function show(User $user, Document $document)
     {
+        $documentID = Document::where('id', $document->id)->first();
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
         $comments =  KnowledgeComment::latest('created_at')->get();
         $replies =  KnowledgeReply::get();
@@ -77,11 +78,12 @@ class KnowledgesController extends Controller
         $payerId = KnowledgeInvoice::where('document_id', $document->id)->first('buyer_id');
         $docIdCheck =  KnowledgeInvoice::where('document_id', $document->id)->first('document_id',);
         $documentRating = Document::where('id', $document->id)->first();
+        $aver = $documentID->averageRating(User::class);  
         $ratingCount = Rating::where('rateable_type', 'App\Document')->where('rateable_id', $document->id)->count();
-        $ratingAve = number_format($documentRating->userAverageRating, 2);
-        $aver = $documentRating->averageRating(User::class);  
-        $ave = number_format($aver, 2);
-        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount', 'ave'));
+        $ratingAve = number_format($aver, 2);
+       
+
+        return view('knowledge.show',compact('user','document', 'follows', 'comments', 'replies','payerId','docIdCheck', 'docCount','documentRating', 'ratingAve', 'ratingCount'));
     }
 
     public function download(User $user, Document $document)

@@ -33,7 +33,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $users = User::get();
+        return view('admin.userDetail', compact('users'));
     }
     
     public function userDetail()
@@ -145,7 +146,7 @@ class AdminController extends Controller
         ->join('question_invoices', 'question_invoices.question_id', '=', 'questions.id')
         ->join('users', 'users.id', '=', 'question_invoices.buyer_id')
         ->get();
-        return view('admin.courseTransaction', compact('transactions'));
+        return view('admin.questionTransaction', compact('transactions'));
     }
 
     public function reportDocument()
@@ -213,7 +214,7 @@ class AdminController extends Controller
         PostReport::where('post_id', $post->id)->update([
             'reportStatus' => '1'
         ]);
-        return redirect()->route('admin.reportPost');
+        return redirect()->route('admin.showReportPost', $post);
     }
 
     public function reactivePost(Post $post)

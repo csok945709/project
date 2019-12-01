@@ -12,8 +12,12 @@
                     @endcan
                     <strong style="font-size:28px;font-weight:900">{{ $questionData->question_caption }}</strong> 
                     <div style="float: right;font-size:30px;color:red;margin-left: 28%">
-                        <span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i>
-                        <strong class="pl-2">{{ $questionData->reward }}</strong>
+                        @if ($question->reward !== 0 && $question->solved == false)
+                            <span style="font-weight:600">Reward </span><i class="fa fa-usd" aria-hidden="true"></i>
+                            <strong class="pl-2">{{ $questionData->reward }}</strong>
+                        @else
+                            <span style="font-weight:600;" class="btn btn-success">Solved </span>
+                        @endif
                     </div>
                     <div class="d-flex">   
                         <div class="pr-4"><strong >{{ $questionData->created_at }}</strong></div>
@@ -40,7 +44,6 @@
                                         <div class="well">
                                                
                                                     <span class="mr-2 mb-3">
-                                                        <img src="{{ $answer->user->profile->profileImage() }}" class="rounded-circle" style="max-width:25px;">
                                                         <i><b> {{ $answer->name }} </b></i>&nbsp;&nbsp;
                                                     </span>
                                                 
@@ -49,7 +52,9 @@
                                                     <div style="margin-left:10px;margin-top:10px;">
                                                        
                                                             @if ($rewards->isEmpty())
-                                                                <a href="{{ route('question.rewardAnswer', [$answer->user->id, $answer->id, $questionData->id]) }}" class="btn btn-primary" style="float: right;">Select as Best Answer</a>
+                                                                @if ($question->user_id === Auth::user()->id)
+                                                                <a href="{{ route('question.rewardAnswer', [$answer->user->id, $answer->id, $questionData->id]) }}" class="btn btn-primary" style="float: right;" onclick="return confirm('Are you sure you want to Select this person as your reward?')">Select as Best Answer</a>
+                                                                @endif
                                                             @else
                                                                 @foreach ($rewards as $reward)
                                                                     @if ($reward->reward_user == $answer->user_id && $reward->answer_id == $answer->id)
@@ -63,7 +68,7 @@
                                                             @endif   
                                                             <a style="cursor: pointer;font-weight:600;" cid="{{ $answer->id }}" name_a="{{ Auth::user()->username }}" token="{{ csrf_token() }}" class="reply">Reply</a>&nbsp;
                                                             <a style="cursor: pointer;font-weight:600;"  class="delete-comment" token="{{ csrf_token() }}" comment-did="{{ $answer->id }}">Delete</a>
-                                                            {{ $answer->updated_at }} 
+                            
                                                             <div class="reply-form">
                                                         <!-- Dynamic Reply form -->                                   
                                                     

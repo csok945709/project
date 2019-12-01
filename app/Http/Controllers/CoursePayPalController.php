@@ -47,7 +47,6 @@ class CoursePayPalController extends Controller
     }
     public function paymentSuccess(Request $request)
     {   
-        
         $token = $request->token;
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($token);
@@ -74,12 +73,13 @@ class CoursePayPalController extends Controller
                 ->insert([
                     'course_id' => $courseID,
                     'user_id' => $UserId,
+                    "status" => true,
                     "created_at" =>  \Carbon\Carbon::now(), # new \Datetime()
                     "updated_at" => \Carbon\Carbon::now(),  # new \Datetime()
                 ]);
 
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
-            return redirect()->route('course.show', [$UserId, $courseID]);
+            return redirect()->route('course.detail', [$UserId, $courseID]);
         }
   
         dd('Something is wrong.');

@@ -106,15 +106,15 @@ class OnlineCourseController extends Controller
         $comments =  CourseComment::latest('created_at')->get();
         $replies =  CourseReply::get();
         $aver = $course->averageRating(User::class);  
-        $ave = number_format($aver, 2);
         $courseRating = Course::where('id', $course->id)->first();
         $ratingCount = Rating::where('rateable_type', 'App\Course')->where('rateable_id', $course->id)->count();
-        $ratingAve = number_format($courseRating->userAverageRating, 2);
+        $ratingAve = number_format($aver, 2);
+        // $ratingAve = number_format($courseRating->userAverageRating, 2);
         $courseRegCheck = DB::table('courseregister')->where('user_id', $user)->where('course_id', $course->id)->where('status', true)->first();
         if(empty($courseRegCheck)) {
             $courseRegCheck = 0;
         }
-        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies','ratingCount','ratingAve', 'courseRegCheck','ave'));
+        return view('onlineCourses/courseDetail',compact('user','course', 'follows','courseCount','payerId','courseIdCheck','comments','replies','ratingCount','ratingAve', 'courseRegCheck'));
     }
 
     public function edit(User $user, Course $course)

@@ -73,7 +73,7 @@ Route::post('/d', 'KnowledgesController@store')->name('document.store');
 Route::get('/d/{user}/{document}/delete', 'KnowledgesController@delete')->name('document.delete');
 Route::get('/d/{user}/{document}/edit', 'KnowledgesController@edit')->name('document.edit');
 Route::patch('/d/{user}/{documentID}', 'KnowledgesController@update')->name('document.update');
-Route::get('/d/{user}/{document}/show', 'KnowledgesController@show')->name('document.show');
+Route::get('/d/show/{user}/{document}', 'KnowledgesController@show')->name('document.show');
 Route::get('/d/{user}/{document}/show/download', 'KnowledgesController@download')->name('document.download');
 Route::post('/ratingDocument/{document}', 'KnowledgesController@documentStar')->name('documentStar');
 Route::get('/d/report/{document}', 'KnowledgesController@report')->name('document.report');
@@ -141,7 +141,7 @@ Route::get('/courseCat', 'OnlineCourseController@courseCat')->name('course.cours
 Route::get('/c/create', 'OnlineCourseController@create')->name('course.create');
 Route::get('/c/{user}/{course}/register', 'OnlineCourseController@courseRegister')->name('course.register');
 Route::get('/c/cancelRegister/{user}/{course}', 'OnlineCourseController@cancelRegister')->name('course.cancelRegister');
-Route::get('/c/{user}/{course}/detail', 'OnlineCourseController@detail')->name('course.detail');
+Route::get('/c/detail/{user}/{course}/', 'OnlineCourseController@detail')->name('course.detail');
 Route::get('/c/{user}/{course}', 'OnlineCourseController@show')->name('course.show');
 Route::post('/c', 'OnlineCourseController@store')->name('course.store');
 Route::get('/c/{user}/{course}/edit', 'OnlineCourseController@edit')->name('course.edit');
@@ -156,7 +156,7 @@ Route::resource('/c/{course}/coursecomments','CourseCommentsController');
 
 //Online Course paypal
 Route::get('course/payment/{course}', 'CoursePayPalController@payment')->name('coursePayment.payment');
-Route::get('course/payment/success', 'CoursePayPalController@paymentSuccess')->name('coursePayment.success');
+Route::get('course/Makepayment/success', 'CoursePayPalController@paymentSuccess')->name('coursePayment.success');
 Route::get('course/cancel', 'CoursePayPalController@cancel')->name('coursePayment.cancel');
 
 //Organizer Apply 
