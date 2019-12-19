@@ -170,7 +170,7 @@ Route::post('/consultant/apply/store', 'ConsultantApplyController@store')->name(
 Route::post('/consultant/addAppointmentTime/store', 'ConsultantAppointmentController@storeAppointmentTime')->name('consultant.storeAppointmentTime');
 Route::get('/consultant/addAppointmentTime/{user}', 'ConsultantAppointmentController@addAppointmentTime')->name('consultant.addAppointmentTime');
 Route::get('/consultant/editAppointmentTime/edit/{user}/{appointment}', 'ConsultantAppointmentController@editAppointmentTime')->name('consultant.editAppointmentTime');
-Route::get('/consultant/cancelAppointmentTime/cancel/{user}/{appointment}', 'ConsultantAppointmentController@cancelAppointmentTime')->name('consultant.cancelAppointmentTime');
+Route::get('/consultant/cancelAppointmentTime/cancel/{user}/{appointment}/{consultant}', 'ConsultantAppointmentController@cancelAppointmentTime')->name('consultant.cancelAppointmentTime');
 Route::patch('/consultant/updateAppointmentTime/update/{user}', 'ConsultantAppointmentController@updateAppointmentTime')->name('consultant.updateAppointmentTime');
 Route::get('/consultant/manageAppointmentTime/{user}', 'ConsultantAppointmentController@manageAppointmentTime')->name('consultant.manageAppointmentTime');
 Route::get('/consultant/editWorkingHour/{user}', 'ConsultantAppointmentController@editWorkingHour')->name('consultant.editWorkingHour');

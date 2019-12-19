@@ -17,7 +17,7 @@
             @foreach ($questions as $question)
                 <div class="container card mb-3">
                     <div class="card-body">
-                        <div class="col-7" style="height:150px">
+                        <div style="height:150px">
                             <a href="{{ route('question.show', [$question->user_id,$question->id]) }}" style="font-size:18px;font-weight:700;line-height:1.5">{!! $question->question_caption !!}</a>    
                             <div style="color:#999;margin:0 0 8px;font-size:13px;line-height:24px">{!! str_limit($question->question_content,$words = 100, $end = '...') !!}</div>
                     </div>

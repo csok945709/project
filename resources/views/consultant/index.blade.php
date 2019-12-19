@@ -23,7 +23,7 @@
                             @else
                                 @foreach ($consultant_applies as $consultant_applie)
                                     @if ($consultant_applie->user_id == Auth::user()->id)
-                                        <a href="{{route('consultant.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Edit Apply</a>
+                                        <a href="{{route('consultant.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Apply Pending</a>
                                     @endif
                                 @endforeach
                             @endif     

@@ -40,7 +40,9 @@ class OnlineCourseController extends Controller
         $OrgForm = OrganizerApply::all();
         $courseCategory = Course_Category::all();
         $courses = Course::get();
-        return view('onlineCourses/index', compact('courses', 'courseCategory','OrgForm'));
+        $userID = Auth::user()->id;
+        $org_applies  = OrganizerApply::where('user_id', $userID)->get();
+        return view('onlineCourses/index', compact('courses', 'courseCategory','OrgForm','org_applies'));
     }
     
     

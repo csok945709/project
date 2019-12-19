@@ -61,13 +61,17 @@
               <td>{{ $appointentDetail->finish_time }}</td>
               <td>{{ $appointentDetail->comments }}</td>
               <td>@if ($appointentDetail->status == 1)
-                  Confirm
+                <span style="color:green;font-weight:600">Confirm</span>
               @else
-                  Cancel
+                  <span style="color:red;font-weight:600">Cancel</span>
               @endif</td>
               <td>
-                <a href="" class="btn btn-primary">Edit Appointment</a>  
-                <a href="" class="btn btn-primary">Cancel Appointment</a>               
+                @if ($appointentDetail->status == 1)
+                    <a href="" class="btn btn-primary">Edit Appointment</a>  
+                    <a href="{{route('consultant.cancelAppointmentTime', [Auth::user()->id, $appointentDetail->id, $appointentDetail->consultant_id])}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to Cancel this Appointment ?')">Cancel Appointment</a>  
+                  @else
+                    <a href="" class="btn btn-primary">View More</a> 
+                  @endif             
               </td>
           </tr>
           @endforeach

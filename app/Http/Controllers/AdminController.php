@@ -45,13 +45,14 @@ class AdminController extends Controller
     
     public function organizerDetail()
     {
-        $users = User::where('organizer', true)->get();
+        $users = User::where('organizer', true)->latest('created_at')->get();
+        
         return view('admin.organizerDetail', compact('users'));
     }
 
     public function consultantDetail()
     {
-        $users = User::where('consultant', true)->get();
+        $users = User::where('consultant', true)->latest('created_at')->get();
         return view('admin.consultantDetail', compact('users'));
     }
     
@@ -69,7 +70,7 @@ class AdminController extends Controller
 
     public function organizerRequest()
     {
-        $applyData = OrganizerApply::get();
+        $applyData = OrganizerApply::latest('created_at')->get();
         return view('admin.organizerRequest', compact('applyData'));
     }
 
@@ -82,7 +83,7 @@ class AdminController extends Controller
     
     public function consultantRequest()
     {
-        $applyData = ConsultantApply::get();
+        $applyData = ConsultantApply::latest('created_at')->get();
         return view('admin.consultantRequest', compact('applyData'));
     }
 

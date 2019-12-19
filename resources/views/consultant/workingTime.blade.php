@@ -12,7 +12,7 @@
                </div>
                <div class="d-flex" style="float: right;">
                     <a href="{{ route('consultant.addAppointmentTime', [Auth::user()->id]) }}" class="btn btn-primary mr-2">Manage Appointment Time</a>
-               <a href="{{ route('profile.consultantTime', Auth::user()->id) }}" class="btn btn-success">View Appointment Details</a>
+                    <a href="{{ route('profile.consultantTime', Auth::user()->id) }}" class="btn btn-success">View Appointment Details</a>
                </div>
                <div id='calendar' class="mt-5"></div>
                 

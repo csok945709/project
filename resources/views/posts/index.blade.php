@@ -25,7 +25,7 @@
                             <img src="/storage/{{ $post->image }}" style="position:absolute;top:50%;margin-top:-140px;left:380px;width:200px;height:150px;">
                        </div>
                        <div class="d-flex">   
-                            <div class="pr-4"><strong >{{ $post->user->posts->count() }}</strong> Likes</div>
+                            <div class="pr-4"><strong >{{ $post->user->posts->count() }}</strong> Published Amount</div>
                        <div class="pr-4"><strong >{{ $post->visit_count }}</strong> Viewers</div>
                             {{-- <like-button post-id="{{ $post->id }}"  ></like-button> --}}
                             {{-- likes="{{ $likes }}" --}}

@@ -61,9 +61,9 @@
               <td>{{ $appointentDetail->finish_time }}</td>
               <td>{{ $appointentDetail->comments }}</td>
               <td>@if ($appointentDetail->status == 1)
-                  Confirm
+                <span style="color:red;font-weight:600;">Confirm</span>
               @else
-                  Cancel
+                  <span style="color:red;font-weight:600;">Cancel</span>
               @endif</td>
               <td>
                 <a href="{{ route('consultant.manageAppointmentTime', [Auth::user()->id]) }}" class="btn btn-primary">View More</a>               

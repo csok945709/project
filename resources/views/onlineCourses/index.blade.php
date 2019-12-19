@@ -13,15 +13,21 @@
                     <div class="d-flex">
                             <select id="courseCat" class="form-control mr-3" style="width:50%;">
                                     <option selected disabled>Select a type</option>
-                                        {{-- @foreach ($courseCategory as $courseCat)
-                                            <option class="option" id="cat{{$courseCat->id}}" value="{{$courseCat->id}}">{{$courseCat->name}}</option>
-                                        @endforeach --}}
                             </select>
                             @if (Auth::user()->organizer === 0)
-                            {{-- @foreach ($OrgForm as $Orgdata) --}}
-                                <a href="{{route('organizer.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Apply Organizer</></a><br />  
+                                @if ($org_applies->isEmpty())
+                                    <a href="{{route('organizer.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Apply Organizer</a><br /> 
+                                @else
+                                    @foreach ($org_applies as $org_applie)
+                                        @if ($org_applie->status == false)
+                                            <a href="{{route('organizer.apply')}}" class="btn btn-danger mr-3" style="width:20%;">Apply Pending</a>                                        
+                                        @endif
+                                    @endforeach
+                                   
+                                @endif
+                                 
                             @else
-                                <a href="{{route('course.create')}}" class="btn btn-success mr-3" style="width:20%;">Create Course</></a><br />  
+                                <a href="{{route('course.create')}}" class="btn btn-success mr-3" style="width:20%;">Create Course</></a><br />
                             @endif
                             <a href="{{route('profile.viewApply', [\Auth::user()->id])}}" class="btn btn-primary mr-3"  style="width:20%;">View My Profile</button></a>
                     </div>

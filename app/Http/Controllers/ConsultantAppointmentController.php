@@ -141,11 +141,11 @@ class ConsultantAppointmentController extends Controller
         $consultant = Input::get('consultant_id');
         return redirect()->route('consultant.viewAppointmentTime', [$consultant]);
     }
-    public function cancelAppointmentTime(User $user, ConsulantAppointment $appointment)
+    public function cancelAppointmentTime(User $user, ConsulantAppointment $appointment, User $consultant)
     {
         ConsulantAppointment::where('id', $appointment->id)->update([
             'status' => '0',
         ]);
-        return redirect()->route('consultant.viewAppointmentTime', [$user]);
+        return redirect()->route('consultant.viewAppointmentTime', [$consultant]);
     }
 }

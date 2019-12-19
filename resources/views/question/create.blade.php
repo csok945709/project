@@ -48,7 +48,7 @@
                     Enter the Reward Amount : <input type="text" class="form-control" name="reward">
                 </div> 
                 <div class="row pt-3">
-                    <button class="btn btn-primary">Create New Question</button>
+                    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to Create this Question ?')">Create New Question</button>
                 </div>
             </form>
         </div>

@@ -6,7 +6,7 @@
             <h1>Consultant  {{ $consultant->username }}</h1> 
         </div>
         <div class="row">
-            <div class="col-7">       
+            <div class="col-9">       
                 <div class="card">
                     <div class="card-body">
                             @if( $consultant->profile->user_id === Auth::user()->id)
@@ -18,7 +18,7 @@
                             <div><a href="#">{{ $consultant->profile->url }} </a></div>
                         </div>
                         
-                        <div style="margin-left:10%">
+                        <div style="margin-left:5%">
                             <img src="{{ $consultant->profile->profileImage() }}" class="rounded-circle" style="width:30%">  
                         </div>
                         <div class="card-body">

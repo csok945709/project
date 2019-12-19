@@ -12,7 +12,8 @@
                </div>
                <div class="d-flex" style="float: right;">
                     <a href="{{ route('consultant.bookingAppointment', [$user->id]) }}" class="btn btn-primary mr-2">Book Appointment</a>
-               </div>
+                    <a href="{{ route('profile.bookAppointmentTime', Auth::user()->id) }}" class="btn btn-success">View Appointment Details</a>
+                </div>
                <div id='calendar' class="mt-5"></div>
                 
                     
