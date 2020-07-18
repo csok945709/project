@@ -582,6 +582,44 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@ckeditor/ckeditor5-core@^12.3.0":
+  version "12.3.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-core/-/ckeditor5-core-12.3.0.tgz#8b230c86fce19ffd76b46f45fff5f8a50a7f3ef9"
+  dependencies:
+    "@ckeditor/ckeditor5-engine" "^14.0.0"
+    "@ckeditor/ckeditor5-utils" "^14.0.0"
+    lodash-es "^4.17.10"
+
+"@ckeditor/ckeditor5-engine@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-engine/-/ckeditor5-engine-14.0.0.tgz#45547ef8a9951bd568607e046751c9b60d99dd2d"
+  dependencies:
+    "@ckeditor/ckeditor5-utils" "^14.0.0"
+    lodash-es "^4.17.10"
+
+"@ckeditor/ckeditor5-ui@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-ui/-/ckeditor5-ui-14.0.0.tgz#5444c1fd863486e87089b15fd86fc6f937f80ce9"
+  dependencies:
+    "@ckeditor/ckeditor5-core" "^12.3.0"
+    "@ckeditor/ckeditor5-utils" "^14.0.0"
+    lodash-es "^4.17.10"
+
+"@ckeditor/ckeditor5-upload@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-upload/-/ckeditor5-upload-12.0.0.tgz#9a293e268ea4e688fd673b4733039cb351b791ce"
+  dependencies:
+    "@ckeditor/ckeditor5-core" "^12.3.0"
+    "@ckeditor/ckeditor5-ui" "^14.0.0"
+    "@ckeditor/ckeditor5-utils" "^14.0.0"
+
+"@ckeditor/ckeditor5-utils@^14.0.0":
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-utils/-/ckeditor5-utils-14.0.0.tgz#9eba9b30a00e2b1011ffc954dd206fcb8a193e20"
+  dependencies:
+    ckeditor5 "^12.4.0"
+    lodash-es "^4.17.10"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1338,6 +1376,14 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+ckeditor5@^12.4.0:
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/ckeditor5/-/ckeditor5-12.4.0.tgz#60bfc4848d29f6c9d5915fa588017152fbd3db60"
+
+ckeditor@^4.12.1:
+  version "4.12.1"
+  resolved "https://registry.yarnpkg.com/ckeditor/-/ckeditor-4.12.1.tgz#954a7b028dd611e44ba51cc7c2fe051cf1052186"
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -1792,6 +1838,10 @@ cyclist@~0.2.2:
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
+
+de-indent@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
@@ -2356,6 +2406,10 @@ follow-redirects@1.5.10, follow-redirects@^1.0.0:
   dependencies:
     debug "=3.1.0"
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2625,7 +2679,7 @@ hash.js@^1.0.0, hash.js@^1.0.3:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
 
-he@1.2.x:
+he@1.2.x, he@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
 
@@ -3189,6 +3243,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+laravel-echo@^1.6.1:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/laravel-echo/-/laravel-echo-1.8.0.tgz#ecc8cbf37d7ddf9c4752c301f55cbeee76a6d025"
+
 laravel-mix@^4.0.7:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-4.1.2.tgz#eaf9999f030d2d45614a83457e0ee3b6f243b56d"
@@ -3262,6 +3320,10 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
+
+lodash-es@^4.17.10:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
 
 lodash._baseassign@^3.0.0:
   version "3.2.0"
@@ -3345,9 +3407,9 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.5:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.19, lodash@^4.17.5:
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
 
 loglevel@^1.6.3:
   version "1.6.3"
@@ -4483,6 +4545,10 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
 
+pusher-js@^5.0.2:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/pusher-js/-/pusher-js-5.1.1.tgz#267495d3a821d511bdb20cf3c624ba0556e0b7df"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
@@ -5530,13 +5596,20 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue-template-compiler@^2.6.10:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.11.tgz#c04704ef8f498b153130018993e56309d4698080"
+  dependencies:
+    de-indent "^1.0.2"
+    he "^1.1.0"
+
 vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
 
-vue@^2.5.17:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
+vue@^2.6.10:
+  version "2.6.11"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
 
 watchpack@^1.6.0:
   version "1.6.0"
